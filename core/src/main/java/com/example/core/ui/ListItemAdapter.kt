@@ -82,8 +82,8 @@ class ListItemAdapter : RecyclerView.Adapter<ListItemAdapter.ViewHolder>() {
                     tvTimesList.visibility = View.VISIBLE
                     tvDifficultyList.visibility = View.VISIBLE
                     tvPortionList.visibility = View.VISIBLE
-                    Log.e("err_total_list_dataCooking: ", listDataCooking.size.toString())
                 }
+                Log.e("err_total_list_dataCooking: ", listDataCooking.size.toString())
             }
         }
 

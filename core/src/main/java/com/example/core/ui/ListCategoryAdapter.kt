@@ -24,12 +24,8 @@ class ListCategoryAdapter : RecyclerView.Adapter<ListCategoryAdapter.CategoryVie
     inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val itemCategory = ItemCategoryBinding.bind(itemView)
         fun bind(data: Category) {
-            with(itemCategory) {
-                tvTitleCategory.text = data.category
-                Log.e("errorListAdapter", data.category.toString())
-            }
-
-
+            itemCategory.tvTitleCategory.text = data.category
+            Log.e("errorListAdapter", data.category.toString())
         }
 
         init {

@@ -13,7 +13,8 @@
         <dist:fusing dist:include="true" />
     </dist:module>
 
-    <application>
+    <application
+        android:allowBackup="true">
         <activity
             android:parentActivityName="com.example.foodapplication.ui.MainActivity"
             android:name=".ui.RandomActivity" />

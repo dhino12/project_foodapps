@@ -86,4 +86,9 @@ class ContentCategoryFragment : Fragment() {
         }
         Log.e("error_content", (activity == null).toString())
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

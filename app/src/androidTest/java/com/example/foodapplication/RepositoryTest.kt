@@ -1,9 +1,6 @@
 package com.example.foodapplication
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.core.data.CookingRepository
-import com.example.core.di.foodDatabase
-import com.example.core.di.networkModule
 import com.example.core.di.repositoryModule
 import com.example.core.domain.repository.IFoodRepository
 import org.junit.After

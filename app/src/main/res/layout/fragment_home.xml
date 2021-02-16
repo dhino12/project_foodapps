@@ -77,7 +77,7 @@
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/tv_article"
+                android:id="@+id/btn_article"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="25dp"
@@ -99,7 +99,7 @@
                 tools:listitem="@layout/item_article" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/tv_cookingMenu"
+                android:id="@+id/btn_cookingMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="25dp"
@@ -126,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="visible" />
+            android:visibility="gone" />
     </FrameLayout>
 
 </androidx.core.widget.NestedScrollView>

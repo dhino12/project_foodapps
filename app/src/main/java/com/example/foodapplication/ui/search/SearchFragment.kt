@@ -21,8 +21,8 @@ import org.koin.android.ext.android.inject
 
 class SearchFragment : Fragment() {
 
-    private lateinit var _binding: FragmentSearchBinding
-    private val binding get() = _binding
+    private var _binding: FragmentSearchBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: SearchViewModel by inject()
 
     override fun onCreateView(
@@ -111,6 +111,11 @@ class SearchFragment : Fragment() {
                 }
             })
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun View.showKeyboard() {

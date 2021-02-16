@@ -2,7 +2,6 @@ package com.example.foodapplication.random.ui
 
 import android.app.Activity
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -45,17 +44,10 @@ class RandomActivity : AppCompatActivity(), ObservableScrollViewCallbacks {
         val toolbars = supportActionBar
         if (toolbars != null) supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-
-            if (Build.VERSION.SDK_INT >= 19) {
-                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            }
-            //make fully Android Transparent Status bar
-            if (Build.VERSION.SDK_INT >= 21) {
-                setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false)
-                window.statusBarColor = Color.TRANSPARENT
-            }
-        }
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        //make fully Android Transparent Status bar
+        setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false)
+        window.statusBarColor = Color.TRANSPARENT
 
         loadKoinModules(viewModelModule)
         dataToViewRandom = DataToViewRandom(binding, this, viewModelRandom)

@@ -2,9 +2,7 @@ package com.example.foodapplication.domain
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.asFlow
-import androidx.lifecycle.asLiveData
 import com.example.core.data.Resource
 import com.example.core.domain.model.Cooking
 import com.example.core.domain.repository.IFoodRepository

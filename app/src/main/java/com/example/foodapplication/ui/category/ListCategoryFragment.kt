@@ -76,4 +76,9 @@ class ListCategoryFragment : Fragment() {
                     .into(binding.coverCategory)
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

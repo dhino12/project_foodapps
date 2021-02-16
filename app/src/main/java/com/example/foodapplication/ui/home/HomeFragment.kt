@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -28,8 +27,6 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by inject()
 
     private var _binding: FragmentHomeBinding? = null
-    private var btnForwardViewArticle: Button? = null
-    private var btnForwardViewCooking: Button? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -38,8 +35,6 @@ class HomeFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        btnForwardViewArticle = _binding!!.tvArticle
-        btnForwardViewCooking = _binding!!.tvCookingMenu
         return binding.root
     }
 
@@ -78,7 +73,7 @@ class HomeFragment : Fragment() {
                             binding.progressBarHome.visibility = View.GONE
                             cookAdapter.setData(food.data)
                             arrayListCooking.addAll(food.data!!)
-                            btnForwardViewCooking?.setOnClickListener { direction ->
+                            binding.btnCookingMenu.setOnClickListener { direction ->
                                 val mBundle = Bundle()
                                 mBundle.putParcelableArrayList(ListItemFragment.COOKING, arrayListCooking)
                                 direction.findNavController().navigate(R.id.action_navigation_home_to_listItemFragment, mBundle)
@@ -101,12 +96,12 @@ class HomeFragment : Fragment() {
                 if (article != null) {
                     when (article) {
                         is Resource.Loading -> {
-                            binding.progressBarHome.visibility = View.GONE
+                            binding.progressBarHome.visibility = View.VISIBLE
                         }
                         is Resource.Success -> {
                             articleAdapter.setData(article.data)
                             arrayListArticle.addAll(article.data!!)
-                            btnForwardViewArticle?.setOnClickListener { direction ->
+                            binding.btnArticle.setOnClickListener { direction ->
                                 val mBundle = Bundle()
                                 mBundle.putParcelableArrayList(ListItemFragment.ARTICLE, arrayListArticle)
                                 direction.findNavController().navigate(R.id.action_navigation_home_to_listItemFragment, mBundle)
@@ -140,4 +135,6 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }
