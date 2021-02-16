@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title">title</string>
+    <string name="tags">tags</string>
+    <string name="times">Waktu</string>
+    <string name="easy">mudah</string>
+    <string name="servings">Porsi</string>
+    <string name="food_name">Nama Makanan</string>
+    <string name="foodImageDescription">foodImage</string>
+</resources>

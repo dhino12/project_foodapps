@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.foodapplication.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navigation_home_to_listItemFragment"
+            app:destination="@id/listItemFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/listItemFragment"
+        android:name="com.example.foodapplication.ui.home.listItem.ListItemFragment"
+        android:label="fragment_list_item"
+        tools:layout="@layout/fragment_list_item" />
+
+    <fragment
+        android:id="@+id/navigation_category"
+        android:name="com.example.foodapplication.ui.category.ListCategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category">
+        <action
+            android:id="@+id/action_navigation_category_to_contentCategoryFragment"
+            app:destination="@id/contentCategoryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/contentCategoryFragment"
+        android:name="com.example.foodapplication.ui.category.contentCategory.ContentCategoryFragment"
+        android:label="ContentCategoryFragment" />
+
+    <activity
+        android:id="@+id/detailFoodActivity"
+        android:name="com.example.foodapplication.ui.detail.food.DetailFoodActivity"
+        android:label="DetailFoodActivity" />
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.foodapplication.ui.search.SearchFragment"
+        android:label="SearchFragment" />
+
+    <fragment
+        android:id="@+id/navigation_favorite"
+        android:name="com.example.foodapplication.favorite.ui.FavoritesFragment"
+        app:moduleName="favorite"
+        android:label="fragment_favorite_fragments" />
+</navigation>

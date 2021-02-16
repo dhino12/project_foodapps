@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Food Application</string>
+    <string name="title_home">Home</string>
+    <string name="title_category">Category</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="foodImageDescription">foodImage</string>
+
+    <string name="times">Waktu</string>
+    <string name="servings">Porsi</string>
+    <string name="food_name">Nama Makanan</string>
+    <string name="article_list">Article List</string>
+    <string name="cooking_list">Cooking List</string>
+    <string name="difficulty">Kesulitan</string>
+    <string name="ingredients">Bahan</string>
+    <string name="step">Langkah</string>
+    <string name="description">Deskripsi</string>
+    <string name="young_red">#F53783</string>
+    <string name="orange">#FF8C00</string>
+    <string name="queryHint">mau masak apa hari ini ?</string>
+    <string name="welcome">Bingung mau masak apa? \nyuk cari menu masakan favorit kamu</string>
+    <string name="article">Artikel</string>
+    <string name="cooking_menu">Menu Masak</string>
+    <string name="welcome2">Hey, Selamat Datang</string>
+    <string name="back_to_menu">Kembali ke Main menu</string>
+    <string name="search_Result">Hasil Pencarian</string>
+    <string name="message_not_favorite_found">Resep Favorite tidak ditemukan\n mungkin anda belum menambahkannya</string>
+    <string name="search_food_word">Cari Resep untuk menu makan kamu hari ini</string>
+    <string name="category_list">Daftar Category</string>
+
+    <string name="message_error">Kamu tidak terhubung dengan internet</string>
+</resources>

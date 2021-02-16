@@ -1,0 +1,4 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="flexible_image_height_detail">350dp</dimen>
+</resources>

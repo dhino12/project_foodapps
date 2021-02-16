@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_marginHorizontal="10dp">
+
+    <com.github.vipulasri.timelineview.TimelineView
+        android:id="@+id/timeline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:markerSize="15dp"
+        app:lineWidth="3dp"
+        app:startLineColor="@color/orange"
+        app:endLineColor="@color/orange"
+        app:lineStyle="normal" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_gravity="center_vertical"
+        app:cardBackgroundColor="@color/colorGrey50"
+        app:contentPadding="15dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:id="@+id/text_timeline_title"
+            android:textColor="@android:color/black"
+            tools:text="Order Successfully Completed" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
