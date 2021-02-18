@@ -5,4 +5,5 @@
     <color name="orange">#FF8C00</color>
     <color name="colorGrey50">#fafafa</color>
     <color name="young_red">#F53783</color>
+    <color name="colorTextTertiary">#EFEFEF</color>
 </resources>

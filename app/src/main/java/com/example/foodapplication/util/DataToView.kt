@@ -20,34 +20,39 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils
 import com.nineoldandroids.view.ViewHelper
 
 class DataToView(
-        private var binding: ActivityDetailFoodBinding,
-        private var context: Context,
-        private var viewModel: DetailViewModel
+    private var binding: ActivityDetailFoodBinding,
+    private var context: Context,
+    private var viewModel: DetailViewModel
 ) {
     private lateinit var adaptersTL: TimelineAdapter
     private lateinit var adapterIngredients: IngredientsAdapter
 
     fun implementToView(
-            cookingDetailEntity: Cooking? = null,
-            articleDetailEntity: Article? = null,
+        cookingDetailEntity: Cooking? = null,
+        articleDetailEntity: Article? = null,
     ) {
 
         if (cookingDetailEntity != null) {
             Glide.with(context)
-                    .load(cookingDetailEntity.thumb)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .apply(RequestOptions.placeholderOf(R.drawable.baseline_hourglass_bottom_black_18dp).error(R.drawable.ic_error))
-                    .into(binding.imgFoodDetail)
+                .load(cookingDetailEntity.thumb)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .apply(RequestOptions.placeholderOf(R.drawable.baseline_hourglass_bottom_black_18dp).error(R.drawable.ic_error))
+                .into(binding.imgFoodDetail)
 
             binding.titleDetail.text = cookingDetailEntity.title
             binding.servingsContentDetail.text = cookingDetailEntity.servings
             binding.timesContentDetail.text = cookingDetailEntity.times
             binding.difficultyContentDetail.text = cookingDetailEntity.difficulty
-            val i = cookingDetailEntity.step!!.split(".,")
-            val j = cookingDetailEntity.ingredient!!.removeSurrounding("[", "]").split(",,")
 
-            setTLRecyclerView(i)
-            setIngRecyclerView(j)
+            val stringToArrayStep = cookingDetailEntity.step?.split(".,")
+            val stringToArrayIngredient = cookingDetailEntity.ingredient?.removeSurrounding("[", "]")?.split(",,")
+
+            if (stringToArrayStep != null) {
+                setTLRecyclerView(stringToArrayStep)
+            }
+            if (stringToArrayIngredient != null) {
+                setIngRecyclerView(stringToArrayIngredient)
+            }
 
             Log.e("error DataToView cookDetail", cookingDetailEntity.title.toString())
             Log.e("error DataToView cookDetail", cookingDetailEntity.difficulty.toString())
@@ -65,19 +70,24 @@ class DataToView(
             binding.rvIngredients.visibility = View.GONE
             binding.tvChangeStep.visibility = View.GONE
             binding.rvStep.visibility = View.GONE
-            binding.cvItemCooking.visibility = View.GONE
             binding.btnFavorite.visibility = View.GONE
 
             binding.tvDesc.visibility = View.VISIBLE
 
             Glide.with(context)
-                    .load(articleDetailEntity?.thumb)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(binding.imgFoodDetail)
+                .load(articleDetailEntity?.thumb)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(binding.imgFoodDetail)
             binding.titleDetail.text = articleDetailEntity?.title
             binding.tvChangeIngredients.text = context.getString(R.string.description)
-            binding.tvAuthor.text = articleDetailEntity?.author
             binding.tvDesc.text = articleDetailEntity?.description
+
+            binding.tvTitleServings.visibility = View.GONE
+            binding.servingsContentDetail.visibility = View.GONE
+            binding.tvTitleTime.visibility = View.GONE
+            binding.timesContentDetail.visibility = View.GONE
+            binding.tvTitleDifficulty.visibility = View.GONE
+            binding.difficultyContentDetail.visibility = View.GONE
         }
     }
 

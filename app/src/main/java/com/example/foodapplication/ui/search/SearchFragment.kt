@@ -69,6 +69,7 @@ class SearchFragment : Fragment() {
                     Log.e("error SearchQuery", query.toString())
                     if (query != null) {
                         binding.imgSearchFood.visibility = View.GONE
+                        binding.imgSearchFood.pauseAnimation()
                         binding.tvSearchMessage.visibility = View.GONE
 
                         viewModel.setQuerySearch(query)

@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.ui.FavoriteAdapter
@@ -20,18 +19,16 @@ import org.koin.core.context.loadKoinModules
 class FavoritesFragment : Fragment() {
 
     private var _binding: FragmentListItemBinding? = null
-    private lateinit var toolbar: Toolbar
     private val binding get() = _binding!!
     private val viewModelFavorite: FavoriteFoodViewModel by inject()
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListItemBinding.inflate(inflater, container, false)
         Toast.makeText(activity, "ada di Favorite", Toast.LENGTH_SHORT).show()
-        toolbar = _binding!!.toolbarBack
         return binding.root
     }
 
@@ -44,7 +41,7 @@ class FavoritesFragment : Fragment() {
             loadKoinModules(viewModelModule)
 
             val favoriteAdapter = FavoriteAdapter()
-            toolbar.title = getString(R.string.favorite)
+            binding.toolbarBack.title = getString(R.string.favorite)
             favoriteAdapter.onItemClick = { selectedData ->
                 val intent = Intent(activity, DetailFoodActivity::class.java)
                 intent.putExtra(DetailFoodActivity.EXTRA_TITLE_COOKING, selectedData.title)
@@ -73,14 +70,14 @@ class FavoritesFragment : Fragment() {
             binding.btnBackToMain.setOnClickListener {
                 requireActivity().onBackPressed()
             }
-            toolbar.setNavigationOnClickListener {
+            binding.toolbarBack.setNavigationOnClickListener {
                 requireActivity().onBackPressed()
             }
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }

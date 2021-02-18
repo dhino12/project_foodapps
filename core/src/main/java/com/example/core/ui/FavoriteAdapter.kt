@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.core.R
 import com.example.core.databinding.ItemListBinding
 import com.example.core.domain.model.Cooking
@@ -26,8 +28,10 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
         fun bind(data: Cooking) {
             with(binding) {
                 Glide.with(itemView.context)
-                        .load(data.thumb)
-                        .into(imgList)
+                    .load(data.thumb)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .apply(RequestOptions.placeholderOf(R.drawable.baseline_hourglass_bottom_black_18dp).error(R.drawable.ic_error))
+                    .into(imgList)
                 tvTitleList.text = data.title
                 tvTimesList.text = data.times
                 tvDifficultyList.text = data.difficulty

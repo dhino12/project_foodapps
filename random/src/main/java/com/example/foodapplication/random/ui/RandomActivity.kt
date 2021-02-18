@@ -1,10 +1,8 @@
 package com.example.foodapplication.random.ui
 
-import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.core.data.Resource
@@ -18,22 +16,12 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils
 import org.koin.android.ext.android.inject
 import org.koin.core.context.loadKoinModules
 
+@Suppress("DEPRECATION")
 class RandomActivity : AppCompatActivity(), ObservableScrollViewCallbacks {
 
     private lateinit var binding: ActivityRandomBinding
     private val viewModelRandom: RandomViewModel by inject()
     private lateinit var dataToViewRandom: DataToViewRandom
-
-    private fun setWindowFlag(activity: Activity, bits: Int, on: Boolean) {
-        val win = activity.window
-        val winParams = win.attributes
-        if (on) {
-            winParams.flags = winParams.flags or bits
-        } else {
-            winParams.flags = winParams.flags and bits.inv()
-        }
-        win.attributes = winParams
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +34,6 @@ class RandomActivity : AppCompatActivity(), ObservableScrollViewCallbacks {
 
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         //make fully Android Transparent Status bar
-        setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false)
         window.statusBarColor = Color.TRANSPARENT
 
         loadKoinModules(viewModelModule)

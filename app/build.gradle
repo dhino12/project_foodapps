@@ -22,7 +22,12 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -49,4 +54,6 @@ android {
 
 dependencies {
     implementation project(":core")
+
+    implementation "com.airbnb.android:lottie:$lottie_version"
 }

@@ -63,8 +63,8 @@ class ListItemAdapter : RecyclerView.Adapter<ListItemAdapter.ViewHolder>() {
             if (dataArticle != null) {
                 with(binding) {
                     Glide.with(itemView.context)
-                            .load(dataArticle.thumb)
-                            .into(imgList)
+                        .load(dataArticle.thumb)
+                        .into(imgList)
                     tvTitleList.text = dataArticle.title
                     tagsList.text = dataArticle.tags
                     tagsList.visibility = View.VISIBLE
@@ -73,8 +73,8 @@ class ListItemAdapter : RecyclerView.Adapter<ListItemAdapter.ViewHolder>() {
             } else {
                 with(binding) {
                     Glide.with(itemView.context)
-                            .load(dataCooking?.thumb)
-                            .into(imgList)
+                        .load(dataCooking?.thumb)
+                        .into(imgList)
                     tvTitleList.text = dataCooking?.title
                     tvTimesList.text = dataCooking?.times
                     tvDifficultyList.text = dataCooking?.difficulty

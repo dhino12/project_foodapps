@@ -25,14 +25,12 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemArticleBinding.bind(itemView)
         fun bind(data: Article) {
-            with(binding) {
-                Glide.with(itemView.context)
-                        .load(data.thumb)
-                        .into(imgFoodArticle)
-                tvTitleArticle.text = data.title
-                tvTagsArticle.text = data.tags
-                Log.e("articleData: ", listData.size.toString())
-            }
+            Glide.with(itemView.context)
+                    .load(data.thumb)
+                    .into(binding.imgFoodArticle)
+            binding.tvTitleArticle.text = data.title
+            binding.tvTagsArticle.text = data.tags
+            Log.e("articleData: ", listData.size.toString())
         }
 
         init {

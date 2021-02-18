@@ -25,17 +25,14 @@ class CookingAdapter : RecyclerView.Adapter<CookingAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemRecentBinding.bind(itemView)
         fun bind(data: Cooking) {
-            with(binding) {
-                Glide.with(itemView.context)
-                        .load(data.thumb)
-                        .into(imgFood)
-                tvTitleFood.text = data.title
-                times.text = data.times
-                difficulty.text = data.difficulty
-                portion.text = data.servings
-                Log.e("cookingTitle", data.title.toString())
-
-            }
+            Glide.with(itemView.context)
+                    .load(data.thumb)
+                    .into(binding.imgFood)
+            binding.tvTitleFood.text = data.title
+            binding.times.text = data.times
+            binding.difficulty.text = data.difficulty
+            binding.portion.text = data.servings
+            Log.e("cookingTitle", data.title.toString())
         }
 
         init {

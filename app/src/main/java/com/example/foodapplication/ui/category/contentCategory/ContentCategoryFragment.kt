@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.data.Resource
@@ -22,7 +21,6 @@ class ContentCategoryFragment : Fragment() {
 
     private var _binding: FragmentListItemBinding? = null
     private val binding get() = _binding!!
-    private lateinit var toolbars: Toolbar
     private val contentViewModel: ContentCategoryViewModel by inject()
 
     companion object {
@@ -31,7 +29,6 @@ class ContentCategoryFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentListItemBinding.inflate(inflater, container, false)
-        toolbars = _binding!!.toolbarBack
         Toast.makeText(activity, arguments?.getString(CONTENT_CATEGORY_TAG).toString(), Toast.LENGTH_SHORT).show()
         return binding.root
     }
@@ -45,7 +42,7 @@ class ContentCategoryFragment : Fragment() {
             val getTag = arguments?.getString(CONTENT_CATEGORY_TAG)
             Log.e("error_contentCategory", getTag.toString())
 
-            toolbars.title = getTag?.replace("-", " ")
+            binding.toolbarBack.title = getTag?.replace("-", " ")
 
             val contentAdapter = ContentCategoryAdapter()
             contentAdapter.onItemClickContent = { selectedData ->
@@ -80,7 +77,7 @@ class ContentCategoryFragment : Fragment() {
                 adapter = contentAdapter
             }
 
-            toolbars.setNavigationOnClickListener {
+            binding.toolbarBack.setNavigationOnClickListener {
                 requireActivity().onBackPressed()
             }
         }

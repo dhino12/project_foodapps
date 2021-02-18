@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,102 +9,97 @@
     app:cardBackgroundColor="@android:color/transparent"
     app:cardCornerRadius="10dp">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:padding="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_image_poster"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            app:cardCornerRadius="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="10dp">
+            <ImageView
+                android:id="@+id/img_list"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="centerCrop" />
+        </androidx.cardview.widget.CardView>
 
-                <ImageView
-                    android:id="@+id/img_list"
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
-                    android:scaleType="centerCrop" />
-            </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/tv_titleList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="10dp"
+            android:lines="3"
+            android:text="@string/title"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@+id/cv_image_poster"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingHorizontal="20dp">
+        <TextView
+            android:id="@+id/tags_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:drawablePadding="5dp"
+            android:lines="1"
+            android:text="@string/tags"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:drawableStartCompat="@drawable/ic_baseline_access_time_24"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_titleList"
+            app:layout_constraintTop_toBottomOf="@+id/tv_titleList" />
 
-                <TextView
-                    android:id="@+id/tv_titleList"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/title"
-                    android:textSize="13sp"
-                    android:textColor="@color/black"
-                    android:lines="3" />
+        <TextView
+            android:id="@+id/tv_times_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:lines="1"
+            android:text="@string/times"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp"
+            android:visibility="visible"
+            app:drawableStartCompat="@drawable/ic_baseline_access_time_24"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_titleList"
+            app:layout_constraintTop_toBottomOf="@+id/tv_titleList" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginVertical="30dp">
+        <TextView
+            android:id="@+id/tv_difficulty_list"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:drawablePadding="5dp"
+            android:lines="1"
+            android:text="@string/easy"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp"
+            android:visibility="visible"
+            app:drawableLeftCompat="@drawable/ic_baseline_tag_faces_24"
+            app:layout_constraintStart_toEndOf="@+id/tv_times_list"
+            app:layout_constraintTop_toTopOf="@id/tv_times_list" />
 
-                    <TextView
-                        android:id="@+id/tags_list"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tags"
-                        android:textSize="12sp"
-                        android:textColor="@android:color/darker_gray"
-                        android:lines="1"
-                        android:drawablePadding="5dp"
-                        android:visibility="gone"
-                        app:drawableStartCompat="@drawable/ic_baseline_access_time_24" />
-
-                    <TextView
-                        android:id="@+id/tv_times_list"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/times"
-                        android:textSize="12sp"
-                        android:textColor="@android:color/darker_gray"
-                        android:lines="1"
-                        android:drawablePadding="5dp"
-                        android:visibility="gone"
-                        app:drawableStartCompat="@drawable/ic_baseline_access_time_24" />
-
-                    <TextView
-                        android:id="@+id/tv_difficulty_list"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/easy"
-                        android:textSize="12sp"
-                        android:textColor="@android:color/darker_gray"
-                        android:lines="1"
-                        android:drawablePadding="5dp"
-                        android:visibility="gone"
-                        app:drawableLeftCompat="@drawable/ic_baseline_tag_faces_24" />
-
-                    <TextView
-                        android:id="@+id/tv_portion_list"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/servings"
-                        android:textSize="12sp"
-                        android:textColor="@android:color/darker_gray"
-                        android:lines="1"
-                        android:visibility="gone"
-                        android:drawablePadding="5dp"
-                        app:drawableLeftCompat="@drawable/ic_baseline_restaurant_24" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_portion_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:drawablePadding="5dp"
+            android:lines="1"
+            android:text="@string/servings"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp"
+            android:visibility="visible"
+            app:drawableLeftCompat="@drawable/ic_baseline_restaurant_24"
+            app:layout_constraintStart_toEndOf="@+id/tv_difficulty_list"
+            app:layout_constraintTop_toTopOf="@id/tv_difficulty_list" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
