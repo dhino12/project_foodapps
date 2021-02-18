@@ -39,11 +39,16 @@ class DataToViewRandom(
             binding.servingsContentDetail.text = cookingDetailEntity.servings
             binding.timesContentDetail.text = cookingDetailEntity.times
             binding.difficultyContentDetail.text = cookingDetailEntity.difficulty
-            val i = cookingDetailEntity.step!!.split(".,")
-            val j = cookingDetailEntity.ingredient!!.removeSurrounding("[", "]").split(",,")
 
-            setTLRecyclerView(i)
-            setIngRecyclerView(j)
+            val stringToArrayStep = cookingDetailEntity.step?.split(".,")
+            val stringToArrayIngredient = cookingDetailEntity.ingredient?.removeSurrounding("[", "]")?.split(",,")
+
+            if (stringToArrayStep != null) {
+                setTLRecyclerView(stringToArrayStep)
+            }
+            if (stringToArrayIngredient != null) {
+                setIngRecyclerView(stringToArrayIngredient)
+            }
 
             Log.e("error DataToView cookDetail", cookingDetailEntity.title.toString())
 
