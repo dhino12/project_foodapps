@@ -1,5 +1,5 @@
 # project_foodapps
-Final Submission MADE Dicoding
+Final Submission MADE Dicoding with Kotlin Coroutine and KOIN
 
 [![Dhino12](https://circleci.com/gh/Dhino12/project_foodapps.svg?style=shield)](https://app.circleci.com/pipelines/github/Dhino12/project_foodapps)
 
