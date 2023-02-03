@@ -25,5 +25,5 @@ interface ApiService {
     suspend fun getCategoryContent(@Path("tag") key: String): CookingResponse
 
     @GET("/api/search/")
-    suspend fun getSearch(@Query("q") values: String): SearchResponse
+    suspend fun getSearch(@Query("s") values: String): SearchResponse
 }

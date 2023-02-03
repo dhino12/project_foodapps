@@ -54,7 +54,7 @@ object DataMapper {
                     ingredient = i!!.map { it.plus(",") }.toString(),
                     thumb = input.thumb,
                     author = input.author.toString(),
-                    step = input.step.toString(),
+                    step = input.step!!.map { it.plus(",") }.toString(),
                     title = input.title,
                     difficulty = input.difficulty,
                     desc = input.desc

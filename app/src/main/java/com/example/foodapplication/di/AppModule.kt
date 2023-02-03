@@ -7,7 +7,7 @@ import com.example.foodapplication.ui.category.contentCategory.ContentCategoryVi
 import com.example.foodapplication.ui.detail.food.DetailViewModel
 import com.example.foodapplication.ui.home.HomeViewModel
 import com.example.foodapplication.ui.search.SearchViewModel
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val useCaseModule = module {

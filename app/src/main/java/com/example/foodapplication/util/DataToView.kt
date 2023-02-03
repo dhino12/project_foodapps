@@ -44,7 +44,8 @@ class DataToView(
             binding.timesContentDetail.text = cookingDetailEntity.times
             binding.difficultyContentDetail.text = cookingDetailEntity.difficulty
 
-            val stringToArrayStep = cookingDetailEntity.step?.split(".,")
+            Log.e("step", cookingDetailEntity.step.toString())
+            val stringToArrayStep = cookingDetailEntity.step?.removeSurrounding("[", "]")?.split(",,")
             val stringToArrayIngredient = cookingDetailEntity.ingredient?.removeSurrounding("[", "]")?.split(",,")
 
             if (stringToArrayStep != null) {
@@ -148,7 +149,7 @@ class DataToView(
 
     private fun getActionBarSize(): Int {
         val typedValue = TypedValue()
-        val textSizeAttr = intArrayOf(R.attr.actionBarSize)
+        val textSizeAttr = intArrayOf(com.google.android.material.R.attr.actionBarSize)
         val indexOfAttrTextSize = 0
         val a = context.obtainStyledAttributes(typedValue.data, textSizeAttr)
         val actionBarSize = a.getDimensionPixelSize(indexOfAttrTextSize, -1)

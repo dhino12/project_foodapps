@@ -7,9 +7,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.core.data.Resource
 import com.example.core.domain.model.Cooking
-import com.example.foodapplication.random.databinding.ActivityRandomBinding
 import com.example.foodapplication.random.di.viewModelModule
 import com.example.foodapplication.random.util.DataToViewRandom
+import com.example.random.databinding.ActivityRandomBinding
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks
 import com.github.ksoichiro.android.observablescrollview.ScrollState
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils
@@ -53,7 +53,7 @@ class RandomActivity : AppCompatActivity(), ObservableScrollViewCallbacks {
             }
 
             viewModelRandom.setRandomData(keyCollection)
-            viewModelRandom.cookingData.observe(this, { response ->
+            viewModelRandom.cookingData.observe(this) { response ->
                 if (response != null) {
                     when (response) {
                         is Resource.Loading -> {
@@ -64,11 +64,12 @@ class RandomActivity : AppCompatActivity(), ObservableScrollViewCallbacks {
                             dataToViewRandom.implementToView(response.data)
                         }
                         is Resource.Error -> {
-                            Toast.makeText(this, "Error ${response.message}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Error ${response.message}", Toast.LENGTH_SHORT)
+                                .show()
                         }
                     }
                 }
-            })
+            }
             binding.scroll.setScrollViewCallbacks(this)
 
             ScrollUtils.addOnGlobalLayoutListener(binding.scroll) {

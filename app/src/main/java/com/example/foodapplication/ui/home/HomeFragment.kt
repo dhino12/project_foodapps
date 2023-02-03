@@ -63,7 +63,7 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
 
-            homeViewModel.cook.observe(viewLifecycleOwner, { food ->
+            homeViewModel.cook.observe(viewLifecycleOwner) { food ->
                 if (food != null) {
                     when (food) {
                         is Resource.Loading -> {
@@ -75,24 +75,41 @@ class HomeFragment : Fragment() {
                             arrayListCooking.addAll(food.data!!)
                             binding.btnCookingMenu.setOnClickListener { direction ->
                                 val mBundle = Bundle()
-                                mBundle.putParcelableArrayList(ListItemFragment.COOKING, arrayListCooking)
-                                direction.findNavController().navigate(R.id.action_navigation_home_to_listItemFragment, mBundle)
+                                mBundle.putParcelableArrayList(
+                                    ListItemFragment.COOKING,
+                                    arrayListCooking
+                                )
+
+                                direction.findNavController().navigate(
+                                    R.id.action_navigation_home_to_listItemFragment,
+                                    mBundle
+                                )
                             }
                             binding.randomButton.setOnClickListener {
-                                val moveToRandom = Intent(activity, Class.forName("com.example.foodapplication.random.ui.RandomActivity"))
-                                moveToRandom.putParcelableArrayListExtra("keyRandom", arrayListCooking)
+                                val moveToRandom = Intent(
+                                    activity,
+                                    Class.forName("com.example.foodapplication.random.ui.RandomActivity")
+                                )
+                                moveToRandom.putParcelableArrayListExtra(
+                                    "keyRandom",
+                                    arrayListCooking
+                                )
                                 startActivity(moveToRandom)
                             }
                         }
                         is Resource.Error -> {
-                            Toast.makeText(activity, getString(R.string.message_error), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                activity,
+                                getString(R.string.message_error),
+                                Toast.LENGTH_SHORT
+                            ).show()
                             Log.e("error CookingHomeFragment", "error ${food.message}")
                         }
                     }
                 }
-            })
+            }
 
-            homeViewModel.article.observe(viewLifecycleOwner, { article ->
+            homeViewModel.article.observe(viewLifecycleOwner) { article ->
                 if (article != null) {
                     when (article) {
                         is Resource.Loading -> {
@@ -103,17 +120,27 @@ class HomeFragment : Fragment() {
                             arrayListArticle.addAll(article.data!!)
                             binding.btnArticle.setOnClickListener { direction ->
                                 val mBundle = Bundle()
-                                mBundle.putParcelableArrayList(ListItemFragment.ARTICLE, arrayListArticle)
-                                direction.findNavController().navigate(R.id.action_navigation_home_to_listItemFragment, mBundle)
+                                mBundle.putParcelableArrayList(
+                                    ListItemFragment.ARTICLE,
+                                    arrayListArticle
+                                )
+                                direction.findNavController().navigate(
+                                    R.id.action_navigation_home_to_listItemFragment,
+                                    mBundle
+                                )
                             }
                         }
                         is Resource.Error -> {
-                            Toast.makeText(activity, getString(R.string.message_error), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                activity,
+                                getString(R.string.message_error),
+                                Toast.LENGTH_SHORT
+                            ).show()
                             Log.e("error ArticleHomeFragment", "error ${article.message}")
                         }
                     }
                 }
-            })
+            }
 
             binding.searchButton.setOnClickListener { direction ->
                 direction.findNavController().navigate(R.id.action_navigation_home_to_searchFragment)

@@ -37,7 +37,7 @@ val foodDatabase = module {
 
 val networkModule = module {
     single {
-        val hostname = "masak-apa.tomorisakura.vercel.app"
+        val hostname = "resep-hari-ini.vercel.app"
         val certificatePinner = CertificatePinner.Builder()
                 .add(hostname, "sha256/95f2b7e3d2e57d7a0a1d0d4c9d80fc3c8d18b75cc47f87ae40ab182d8c161aae")
                 .add(hostname, "sha256/RGAPlLRQcn1xdnOcTeachA2DqeJsIVoaph5br+UlEpA=")
@@ -52,7 +52,7 @@ val networkModule = module {
     }
     single {
         val retrofit = Retrofit.Builder()
-                .baseUrl("https://masak-apa.tomorisakura.vercel.app/")
+                .baseUrl("https://resep-hari-ini.vercel.app/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(get())
                 .build()

@@ -77,8 +77,8 @@
 
                         <ImageButton
                             android:id="@+id/btn_favorite"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:background="@color/white"
                             android:contentDescription="@string/foodImageDescription"
                             android:src="@drawable/ic_baseline_favorite_border_24"

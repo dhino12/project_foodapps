@@ -1,5 +1,19 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "Food Application"
+include ':app'
+include ':core'
 include ':favorite'
 include ':random'
-include ':core'
-include ':app'
-rootProject.name = "Food Application"

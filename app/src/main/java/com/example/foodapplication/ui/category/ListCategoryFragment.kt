@@ -46,7 +46,7 @@ class ListCategoryFragment : Fragment() {
                 direction.findNavController().navigate(R.id.action_navigation_category_to_contentCategoryFragment, mBundle)
             }
 
-            listCategoryViewModel.listCategory.observe(viewLifecycleOwner, { foodCategory ->
+            listCategoryViewModel.listCategory.observe(viewLifecycleOwner) { foodCategory ->
                 if (foodCategory != null) {
                     when (foodCategory) {
                         is Resource.Loading -> {
@@ -58,11 +58,15 @@ class ListCategoryFragment : Fragment() {
                         }
                         is Resource.Error -> {
                             binding.progressBarCategory.visibility = View.VISIBLE
-                            Toast.makeText(activity, "Error ${foodCategory.message}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                activity,
+                                "Error ${foodCategory.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
-            })
+            }
 
             with(binding.rvListCategory) {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

@@ -28,4 +28,8 @@
     <string name="category_list">Daftar Category</string>
 
     <string name="message_error">Kamu tidak terhubung dengan internet</string>
+    <string name="previous">Kembali</string>
+    <string name="title_random">Module Title</string>
+    <string name="setting">setting</string>
+    <string name="hello_first_fragment">hello_first_fragment</string>
 </resources>

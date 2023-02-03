@@ -69,7 +69,7 @@ class DetailFoodActivity : AppCompatActivity(), ObservableScrollViewCallbacks {
             }
 
             viewModel.setSelectedCook(titleCookingDb = keyCollection)
-            viewModel.cookingDetail.observe(this, { titleKey ->
+            viewModel.cookingDetail.observe(this) { titleKey ->
                 if (titleKey != null) {
                     when (titleKey) {
                         is Resource.Loading -> {
@@ -80,12 +80,13 @@ class DetailFoodActivity : AppCompatActivity(), ObservableScrollViewCallbacks {
                             dataToView.implementToView(cookingDetailEntity = titleKey.data)
                         }
                         is Resource.Error -> {
-                            Toast.makeText(this, titleKey.message.toString(), Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, titleKey.message.toString(), Toast.LENGTH_LONG)
+                                .show()
                             Log.e("error CookingDetailActivity", "error ${titleKey.message}")
                         }
                     }
                 }
-            })
+            }
         } else if (titleArticle != null && idArticle != null && tagArticle != null) {
             if (keyCollection.isNullOrEmpty()) {
                 keyCollection.add(titleArticle)
@@ -98,7 +99,7 @@ class DetailFoodActivity : AppCompatActivity(), ObservableScrollViewCallbacks {
             }
 
             viewModel.setSelectedCook(titleArticleDb = keyCollection)
-            viewModel.articleDetail.observe(this, { titleKey ->
+            viewModel.articleDetail.observe(this) { titleKey ->
                 if (titleKey != null) {
                     when (titleKey) {
                         is Resource.Loading -> {
@@ -109,12 +110,13 @@ class DetailFoodActivity : AppCompatActivity(), ObservableScrollViewCallbacks {
                             dataToView.implementToView(articleDetailEntity = titleKey.data)
                         }
                         is Resource.Error -> {
-                            Toast.makeText(this, titleKey.message.toString(), Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, titleKey.message.toString(), Toast.LENGTH_LONG)
+                                .show()
                             Log.e("error ArticleDetailActivity", "error ${titleKey.message}")
                         }
                     }
                 }
-            })
+            }
         }
 
         binding.scroll.setScrollViewCallbacks(this)

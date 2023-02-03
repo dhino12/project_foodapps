@@ -13,15 +13,15 @@ import com.example.core.domain.model.Cooking
 import com.example.core.ui.IngredientsAdapter
 import com.example.core.ui.TimelineAdapter
 import com.example.foodapplication.R
-import com.example.foodapplication.random.databinding.ActivityRandomBinding
 import com.example.foodapplication.random.ui.RandomViewModel
+import com.example.random.databinding.ActivityRandomBinding
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils
 import com.nineoldandroids.view.ViewHelper
 
 class DataToViewRandom(
-        private var binding: ActivityRandomBinding,
-        private var context: Context,
-        private var viewModel: RandomViewModel
+    private var binding: ActivityRandomBinding,
+    private var context: Context,
+    private var viewModel: RandomViewModel
 ) {
     private lateinit var adaptersTL: TimelineAdapter
     private lateinit var adapterIngredients: IngredientsAdapter
@@ -121,7 +121,7 @@ class DataToViewRandom(
 
     private fun getActionBarSize(): Int {
         val typedValue = TypedValue()
-        val textSizeAttr = intArrayOf(R.attr.actionBarSize)
+        val textSizeAttr = intArrayOf(com.google.android.material.R.attr.actionBarSize)
         val indexOfAttrTextSize = 0
         val a = context.obtainStyledAttributes(typedValue.data, textSizeAttr)
         val actionBarSize = a.getDimensionPixelSize(indexOfAttrTextSize, -1)

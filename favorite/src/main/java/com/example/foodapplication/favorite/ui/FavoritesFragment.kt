@@ -10,8 +10,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.ui.FavoriteAdapter
+import com.example.favorite.R
 import com.example.foodapplication.databinding.FragmentListItemBinding
-import com.example.foodapplication.favorite.R
 import com.example.foodapplication.ui.detail.food.DetailFoodActivity
 import org.koin.android.ext.android.inject
 import org.koin.core.context.loadKoinModules
@@ -48,7 +48,7 @@ class FavoritesFragment : Fragment() {
                 startActivity(intent)
             }
 
-            viewModelFavorite.favoriteData.observe(viewLifecycleOwner, { dataFavorite ->
+            viewModelFavorite.favoriteData.observe(viewLifecycleOwner) { dataFavorite ->
                 if (dataFavorite.isNullOrEmpty()) {
                     binding.imgNoItem.visibility = View.VISIBLE
                     binding.btnBackToMain.visibility = View.VISIBLE
@@ -60,7 +60,7 @@ class FavoritesFragment : Fragment() {
                 }
                 favoriteAdapter.setData(dataFavorite)
                 favoriteAdapter.notifyDataSetChanged()
-            })
+            }
 
             with(binding.rvListItem) {
                 layoutManager = LinearLayoutManager(context)

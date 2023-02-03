@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -49,9 +50,9 @@
         android:name="com.example.foodapplication.ui.search.SearchFragment"
         android:label="SearchFragment" />
 
-    <fragment
-        android:id="@+id/navigation_favorite"
-        android:name="com.example.foodapplication.favorite.ui.FavoritesFragment"
-        app:moduleName="favorite"
-        android:label="fragment_favorite_fragments" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_favorite"-->
+<!--        android:name="com.example.foodapplication.favorite.ui.FavoritesFragment"-->
+<!--        app:moduleName="favorite"-->
+<!--        android:label="fragment_favorite_fragments" />-->
 </navigation>
