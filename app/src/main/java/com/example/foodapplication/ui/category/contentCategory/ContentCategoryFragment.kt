@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.data.Resource
-import com.example.core.ui.ContentCategoryAdapter
+import com.example.core.ui.ListItemAdapter
 import com.example.foodapplication.R
 import com.example.foodapplication.databinding.FragmentListItemBinding
 import com.example.foodapplication.ui.detail.food.DetailFoodActivity
@@ -38,22 +38,20 @@ class ContentCategoryFragment : Fragment() {
 
         if (activity != null) {
             requireActivity().window.statusBarColor = Color.parseColor(getString(R.string.orange))
-
             val getTag = arguments?.getString(CONTENT_CATEGORY_TAG)
-            Log.e("error_contentCategory", getTag.toString())
+//            Log.e("error_contentCategory", getTag.toString())
 
             binding.toolbarBack.title = getTag?.replace("-", " ")
 
-            val contentAdapter = ContentCategoryAdapter()
-            contentAdapter.onItemClickContent = { selectedData ->
+            val listAdapter = ListItemAdapter {cooking ->
                 val intent = Intent(context, DetailFoodActivity::class.java)
-                intent.putExtra(DetailFoodActivity.EXTRA_TITLE_COOKING, selectedData.title)
-                intent.putExtra(DetailFoodActivity.EXTRA_ID_COOKING, selectedData.cookingID)
+                intent.putExtra(DetailFoodActivity.EXTRA_TITLE_COOKING, cooking.title)
+                intent.putExtra(DetailFoodActivity.EXTRA_ID_COOKING, cooking.cookingID)
                 startActivity(intent)
             }
 
             contentViewModel.setSelectedCategory(getTag)
-            contentViewModel.contentCategory.observe(viewLifecycleOwner, { contentData ->
+            contentViewModel.contentCategory.observe(viewLifecycleOwner) { contentData ->
                 if (contentData != null) {
                     when (contentData) {
                         is Resource.Loading -> {
@@ -61,20 +59,24 @@ class ContentCategoryFragment : Fragment() {
                         }
                         is Resource.Success -> {
                             binding.progressBarCategoryList.visibility = View.GONE
-                            contentAdapter.setData(contentData.data)
-                            Log.e("error_contentCategory", contentData.data?.size.toString())
+                            listAdapter.submitList(contentData.data)
+//                            Log.e("error_contentCategory", contentData.data?.size.toString())
                         }
                         is Resource.Error -> {
                             binding.progressBarCategoryList.visibility = View.VISIBLE
-                            Toast.makeText(activity, contentData.message.toString(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                activity,
+                                contentData.message.toString(),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
-            })
+            }
             with(binding.rvListItem) {
                 layoutManager = LinearLayoutManager(activity)
                 setHasFixedSize(true)
-                adapter = contentAdapter
+                adapter = listAdapter
             }
 
             binding.toolbarBack.setNavigationOnClickListener {

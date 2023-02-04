@@ -30,9 +30,9 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -43,25 +43,21 @@ class HomeFragment : Fragment() {
 
         if (activity != null) {
             requireActivity().window.statusBarColor = Color.parseColor(getString(R.string.orange))
-            val cookAdapter = CookingAdapter()
-            val articleAdapter = ArticleAdapter()
+            val cookAdapter = CookingAdapter { cooking ->
+                val intent = Intent(context, DetailFoodActivity::class.java)
+                intent.putExtra(DetailFoodActivity.EXTRA_TITLE_COOKING, cooking.title)
+                intent.putExtra(DetailFoodActivity.EXTRA_ID_COOKING, cooking.cookingID)
+                startActivity(intent)
+            }
+            val articleAdapter = ArticleAdapter { article ->
+                val intent = Intent(activity, DetailFoodActivity::class.java)
+                intent.putExtra(DetailFoodActivity.EXTRA_ARTICLE_TITLE, article.title)
+                intent.putExtra(DetailFoodActivity.EXTRA_ARTICLE_TAG, article.tags)
+                intent.putExtra(DetailFoodActivity.EXTRA_ARTICLE_ID, article.key)
+                startActivity(intent)
+            }
             val arrayListArticle = ArrayList<Article>()
             val arrayListCooking = ArrayList<Cooking>()
-
-            cookAdapter.onItemClick = { selectedData ->
-                val intent = Intent(context, DetailFoodActivity::class.java)
-                intent.putExtra(DetailFoodActivity.EXTRA_TITLE_COOKING, selectedData.title)
-                intent.putExtra(DetailFoodActivity.EXTRA_ID_COOKING, selectedData.cookingID)
-                startActivity(intent)
-            }
-
-            articleAdapter.onItemClick = { selectedData ->
-                val intent = Intent(activity, DetailFoodActivity::class.java)
-                intent.putExtra(DetailFoodActivity.EXTRA_ARTICLE_TITLE, selectedData.title)
-                intent.putExtra(DetailFoodActivity.EXTRA_ARTICLE_TAG, selectedData.tags)
-                intent.putExtra(DetailFoodActivity.EXTRA_ARTICLE_ID, selectedData.key)
-                startActivity(intent)
-            }
 
             homeViewModel.cook.observe(viewLifecycleOwner) { food ->
                 if (food != null) {
@@ -71,7 +67,7 @@ class HomeFragment : Fragment() {
                         }
                         is Resource.Success -> {
                             binding.progressBarHome.visibility = View.GONE
-                            cookAdapter.setData(food.data)
+                            cookAdapter.submitList(food.data)
                             arrayListCooking.addAll(food.data!!)
                             binding.btnCookingMenu.setOnClickListener { direction ->
                                 val mBundle = Bundle()
@@ -116,7 +112,7 @@ class HomeFragment : Fragment() {
                             binding.progressBarHome.visibility = View.VISIBLE
                         }
                         is Resource.Success -> {
-                            articleAdapter.setData(article.data)
+                            articleAdapter.submitList(article.data)
                             arrayListArticle.addAll(article.data!!)
                             binding.btnArticle.setOnClickListener { direction ->
                                 val mBundle = Bundle()

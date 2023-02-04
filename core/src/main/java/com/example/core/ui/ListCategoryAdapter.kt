@@ -1,37 +1,47 @@
 package com.example.core.ui
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.material.MaterialTheme
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.R
 import com.example.core.databinding.ItemCategoryBinding
 import com.example.core.domain.model.Category
 
-class ListCategoryAdapter : RecyclerView.Adapter<ListCategoryAdapter.CategoryViewHolder>() {
+class ListCategoryAdapter (private val onItemClick: (Category, View) -> Unit)
+    : ListAdapter<Category, ListCategoryAdapter.CategoryViewHolder>(DIFF_CALLBACK) {
 
-    private val listData = ArrayList<Category>()
-    var onClick: ((Category, View) -> Unit)? = null
+    companion object {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<Category> =
+            object : DiffUtil.ItemCallback<Category>() {
+                override fun areItemsTheSame(oldUser: Category, newUser: Category): Boolean {
+                    return oldUser.category == newUser.category
+                }
 
-    fun setData(newListData: List<Category>?) {
-        if (newListData == null) return
-        listData.clear()
-        listData.addAll(newListData)
-        notifyDataSetChanged()
+                @SuppressLint("DiffUtilEquals")
+                override fun areContentsTheSame(oldUser: Category, newUser: Category): Boolean {
+                    return oldUser == newUser
+                }
+            }
     }
 
     inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val itemCategory = ItemCategoryBinding.bind(itemView)
         fun bind(data: Category) {
-            itemCategory.tvTitleCategory.text = data.category
-            Log.e("errorListAdapter", data.category.toString())
-        }
-
-        init {
-            itemCategory.root.setOnClickListener {
-                onClick?.invoke(listData[adapterPosition], itemView)
+            itemCategory.composeView.setContent {
+                MaterialTheme {
+                    ItemCardVertical(
+                        title = data.category.toString(),
+                        OnItemClick = { onItemClick(data, itemView) }
+                    )
+                }
             }
+            Log.e("errorListAdapter", data.category.toString())
         }
     }
 
@@ -41,8 +51,6 @@ class ListCategoryAdapter : RecyclerView.Adapter<ListCategoryAdapter.CategoryVie
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        holder.bind(listData[position])
+        holder.bind(getItem(position))
     }
-
-    override fun getItemCount(): Int = listData.size
 }

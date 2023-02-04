@@ -39,12 +39,10 @@ class SearchFragment : Fragment() {
 
         if (activity != null) {
 
-            val searchAdapter = SearchAdapter()
-
-            searchAdapter.onItemClicked = { selectedItem ->
+            val searchAdapter = SearchAdapter { search ->
                 val intent = Intent(activity, DetailFoodActivity::class.java)
-                intent.putExtra(DetailFoodActivity.EXTRA_TITLE_COOKING, selectedItem.title)
-                intent.putExtra(DetailFoodActivity.EXTRA_ID_COOKING, selectedItem.cookingID)
+                intent.putExtra(DetailFoodActivity.EXTRA_TITLE_COOKING, search.title)
+                intent.putExtra(DetailFoodActivity.EXTRA_ID_COOKING, search.cookingID)
                 startActivity(intent)
             }
 
@@ -74,20 +72,24 @@ class SearchFragment : Fragment() {
 
                         viewModel.setQuerySearch(query)
                         binding.progressBar.visibility = View.VISIBLE
-                        viewModel.search.observe(viewLifecycleOwner, { foodSearch ->
+                        viewModel.search.observe(viewLifecycleOwner) { foodSearch ->
                             when (foodSearch) {
                                 is Resource.Loading -> {
                                     binding.progressBar.visibility = View.VISIBLE
                                 }
                                 is Resource.Success -> {
                                     if (foodSearch.data.isNullOrEmpty()) {
-                                        Toast.makeText(activity, "Maaf Data kosong silahkan refresh kembali ${foodSearch.message} / mohon tunggu ", Toast.LENGTH_LONG).show()
+                                        Toast.makeText(
+                                            activity,
+                                            "Maaf Data kosong silahkan refresh kembali ${foodSearch.message} / mohon tunggu ",
+                                            Toast.LENGTH_LONG
+                                        ).show()
                                     }
                                     binding.imgSearchNotFound.visibility = View.GONE
                                     binding.tvSearchResult.visibility = View.VISIBLE
                                     binding.progressBar.visibility = View.GONE
 
-                                    searchAdapter.setData(foodSearch.data)
+                                    searchAdapter.submitList(foodSearch.data)
                                     Log.e("error SearchData", foodSearch.data?.size.toString())
 
                                     with(binding.rvSearchFood) {
@@ -99,10 +101,14 @@ class SearchFragment : Fragment() {
                                 }
                                 is Resource.Error -> {
                                     binding.imgSearchNotFound.visibility = View.VISIBLE
-                                    Toast.makeText(activity, foodSearch.message.toString(), Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        activity,
+                                        foodSearch.message.toString(),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                             }
-                        })
+                        }
                     }
                     return false
                 }

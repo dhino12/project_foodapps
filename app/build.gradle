@@ -37,13 +37,19 @@ android {
     }
     buildFeatures {
         viewBinding true
+        compose true
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.2.0'
+    }
+
     dynamicFeatures = [':favorite', ':random']
 }
 
 dependencies {
     implementation project(":core")
 
-    implementation "com.airbnb.android:lottie:$lottie_version" 
+    implementation "com.airbnb.android:lottie:$lottie_version"
 
 }

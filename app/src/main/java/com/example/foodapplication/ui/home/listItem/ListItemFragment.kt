@@ -9,8 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.core.domain.model.Article
 import com.example.core.domain.model.Cooking
+import com.example.core.domain.model.Search
+import com.example.core.ui.ListArticleAdapter
 import com.example.core.ui.ListItemAdapter
 import com.example.foodapplication.R
 import com.example.foodapplication.databinding.FragmentListItemBinding
@@ -23,7 +26,7 @@ class ListItemFragment : Fragment() {
     private val binding get() = _binding!!
 
     companion object {
-        const val ARTICLE = "list_article"
+        const val ARTICLE = "list_Article"
         const val COOKING = "list_cooking"
     }
 
@@ -42,39 +45,38 @@ class ListItemFragment : Fragment() {
         if (activity != null) {
             val dataArticleList = arguments?.getParcelableArrayList<Article>(ARTICLE)
             val dataCookingList = arguments?.getParcelableArrayList<Cooking>(COOKING)
-
-            val listAdapter = ListItemAdapter()
+            var listAdapter: Any? = null
 
             if (dataArticleList != null) {
-                // article list =============
-                toolbar.title = getString(R.string.article_list)
+                // Search list =============
+                toolbar.title = getString(R.string.Search_list)
 
-                listAdapter.onItemClickArticle = { selectedData ->
+                listAdapter = ListArticleAdapter { article ->
                     val intent = Intent(activity, DetailFoodActivity::class.java)
-                    intent.putExtra(DetailFoodActivity.EXTRA_ARTICLE_ID, selectedData.key)
-                    intent.putExtra(DetailFoodActivity.EXTRA_ARTICLE_TAG, selectedData.tags)
-                    intent.putExtra(DetailFoodActivity.EXTRA_ARTICLE_TITLE, selectedData.title)
+                    intent.putExtra(DetailFoodActivity.EXTRA_ARTICLE_ID, article.key)
+                    intent.putExtra(DetailFoodActivity.EXTRA_ARTICLE_TAG, article.tags)
+                    intent.putExtra(DetailFoodActivity.EXTRA_ARTICLE_TITLE, article.title)
                     startActivity(intent)
                 }
-                listAdapter.setData(newListDataArticle = dataArticleList)
+                listAdapter.submitList(dataArticleList)
+            }
 
-            } else if (dataCookingList != null) {
+            if (dataCookingList != null) {
                 // cooking list =============
                 toolbar.title = getString(R.string.cooking_list)
-                listAdapter.onItemClickCooking = { selectedData ->
+                listAdapter = ListItemAdapter { cooking ->
                     val intent = Intent(activity, DetailFoodActivity::class.java)
-                    intent.putExtra(DetailFoodActivity.EXTRA_TITLE_COOKING, selectedData.title)
-                    intent.putExtra(DetailFoodActivity.EXTRA_ID_COOKING, selectedData.cookingID)
+                    intent.putExtra(DetailFoodActivity.EXTRA_TITLE_COOKING, cooking.title)
+                    intent.putExtra(DetailFoodActivity.EXTRA_ID_COOKING, cooking.cookingID)
                     startActivity(intent)
                 }
-                listAdapter.setData(newListDataCooking = dataCookingList)
-
+                listAdapter.submitList(dataCookingList)
             }
 
             with(binding.rvListItem) {
                 layoutManager = LinearLayoutManager(activity)
                 setHasFixedSize(true)
-                adapter = listAdapter
+                adapter = listAdapter as RecyclerView.Adapter<*>?
             }
 
             toolbar.setNavigationOnClickListener {

@@ -37,14 +37,12 @@ class ListCategoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-            val listCategoryAdapter = ListCategoryAdapter()
-            requireActivity().window.statusBarColor = Color.parseColor(getString(R.string.young_red))
-
-            listCategoryAdapter.onClick = { selectedData, direction ->
+            val listCategoryAdapter = ListCategoryAdapter { category, direction ->
                 val mBundle = Bundle()
-                mBundle.putString(ContentCategoryFragment.CONTENT_CATEGORY_TAG, selectedData.key)
+                mBundle.putString(ContentCategoryFragment.CONTENT_CATEGORY_TAG, category.key)
                 direction.findNavController().navigate(R.id.action_navigation_category_to_contentCategoryFragment, mBundle)
             }
+            requireActivity().window.statusBarColor = Color.parseColor(getString(R.string.young_red))
 
             listCategoryViewModel.listCategory.observe(viewLifecycleOwner) { foodCategory ->
                 if (foodCategory != null) {
@@ -54,7 +52,7 @@ class ListCategoryFragment : Fragment() {
                         }
                         is Resource.Success -> {
                             binding.progressBarCategory.visibility = View.GONE
-                            listCategoryAdapter.setData(foodCategory.data)
+                            listCategoryAdapter.submitList(foodCategory.data)
                         }
                         is Resource.Error -> {
                             binding.progressBarCategory.visibility = View.VISIBLE

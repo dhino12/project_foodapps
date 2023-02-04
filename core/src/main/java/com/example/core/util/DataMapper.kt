@@ -15,12 +15,12 @@ object DataMapper {
         val cookingList = ArrayList<CookingEntity>()
         input?.map {
             val cooking = CookingEntity(
-                    cookingID = it.key!!,
-                    title = it.title,
-                    thumb = it.thumb,
-                    times = it.times,
-                    portion = it.portion,
-                    difficulty = it.difficulty
+                cookingID = it.key!!,
+                title = it.title,
+                thumb = it.thumb,
+                times = it.times,
+                portion = it.portion,
+                difficulty = it.difficulty
             )
             cookingList.add(cooking)
         }
@@ -31,11 +31,11 @@ object DataMapper {
         val articleList = ArrayList<ArticleEntity>()
         input?.map {
             val cooking = ArticleEntity(
-                    key = it.key!!,
-                    title = it.title,
-                    thumb = it.thumb,
-                    tags = it.tags,
-                    isFavorite = false
+                key = it.key!!,
+                title = it.title,
+                thumb = it.thumb,
+                tags = it.tags,
+                isFavorite = false
             )
             articleList.add(cooking)
         }
@@ -49,15 +49,15 @@ object DataMapper {
         Log.e("errorMapEntity", input?.title.toString())
         if (input != null) {
             cookDetail = CookingDetailEntity(
-                    servings = input.servings,
-                    times = input.times,
-                    ingredient = i!!.map { it.plus(",") }.toString(),
-                    thumb = input.thumb,
-                    author = input.author.toString(),
-                    step = input.step!!.map { it.plus(",") }.toString(),
-                    title = input.title,
-                    difficulty = input.difficulty,
-                    desc = input.desc
+                servings = input.servings,
+                times = input.times,
+                ingredient = i!!.map { it.plus(",") }.toString(),
+                thumb = input.thumb,
+                author = input.author.toString(),
+                step = input.step!!.map { it.plus(",") }.toString(),
+                title = input.title,
+                difficulty = input.difficulty,
+                desc = input.desc
             )
         }
         return cookDetail
@@ -67,11 +67,11 @@ object DataMapper {
         lateinit var articleDetail: ArticleDetailEntity
         if (input != null) {
             articleDetail = ArticleDetailEntity(
-                    thumb = input.thumb,
-                    datePublished = input.datePublished,
-                    author = input.author,
-                    description = input.description,
-                    title = input.title
+                thumb = input.thumb,
+                datePublished = input.datePublished,
+                author = input.author,
+                description = input.description,
+                title = input.title
             )
         }
         return articleDetail
@@ -81,8 +81,8 @@ object DataMapper {
         val listCategory = ArrayList<ListCategoryEntity>()
         input?.map {
             val category = ListCategoryEntity(
-                    category = it.category,
-                    key = it.key!!
+                category = it.category,
+                key = it.key!!
             )
             listCategory.add(category)
         }
@@ -93,13 +93,13 @@ object DataMapper {
         val cookingList = ArrayList<CookingEntity>()
         input?.map {
             val cooking = CookingEntity(
-                    cookingID = it.key!!,
-                    title = it.title,
-                    thumb = it.thumb,
-                    times = it.times,
-                    portion = it.portion,
-                    difficulty = it.difficulty,
-                    tags = tag
+                cookingID = it.key!!,
+                title = it.title,
+                thumb = it.thumb,
+                times = it.times,
+                portion = it.portion,
+                difficulty = it.difficulty,
+                tags = tag
             )
             cookingList.add(cooking)
         }
@@ -110,12 +110,12 @@ object DataMapper {
         val cookingList = ArrayList<Search>()
         query.map {
             val cooking = Search(
-                    cookingID = it.key!!,
-                    title = it.title,
-                    thumb = it.thumb,
-                    times = it.times,
-                    portion = it.portion,
-                    difficulty = it.difficulty
+                cookingID = it.key!!,
+                title = it.title,
+                thumb = it.thumb,
+                times = it.times,
+                portion = it.portion,
+                difficulty = it.difficulty
             )
             cookingList.add(cooking)
         }
@@ -125,102 +125,102 @@ object DataMapper {
 
     // ==================== Entity to Domain ====================
     fun mapEntitiesCookingToDomain(input: List<CookingEntity>): List<Cooking> =
-            input.map {
-                Cooking(
-                        cookingID = it.cookingID,
-                        title = it.title,
-                        thumb = it.thumb,
-                        times = it.times,
-                        servings = it.portion,
-                        difficulty = it.difficulty,
-                        tags = it.tags
-                )
-            }
+        input.map {
+            Cooking(
+                cookingID = it.cookingID,
+                title = it.title,
+                thumb = it.thumb,
+                times = it.times,
+                servings = it.portion,
+                difficulty = it.difficulty,
+                tags = it.tags
+            )
+        }
 
     fun mapEntitiesCookingDetailToDomain(input: CookingDetailEntity?): Cooking {
 
         return Cooking(
-                servings = input?.servings,
-                times = input?.times,
-                ingredient = input?.ingredient,
-                thumb = input?.thumb,
-                author = input?.author,
-                step = input?.step,
-                title = input?.title,
-                difficulty = input?.difficulty,
-                desc = input?.desc,
-                isFavorite = input?.isFavorite
+            servings = input?.servings,
+            times = input?.times,
+            ingredient = input?.ingredient,
+            thumb = input?.thumb,
+            author = input?.author,
+            step = input?.step,
+            title = input?.title,
+            difficulty = input?.difficulty,
+            desc = input?.desc,
+            isFavorite = input?.isFavorite
         )
     }
 
     fun mapEntitiesCookingFavoriteDetailToDomain(input: List<CookingDetailEntity>): List<Cooking> =
-            input.map {
-                Cooking(
-                        servings = it.servings,
-                        times = it.times,
-                        ingredient = it.ingredient,
-                        thumb = it.thumb,
-                        author = it.author,
-                        step = it.step,
-                        title = it.title,
-                        difficulty = it.difficulty,
-                        desc = it.desc,
-                        isFavorite = it.isFavorite
-                )
-            }
+        input.map {
+            Cooking(
+                servings = it.servings,
+                times = it.times,
+                ingredient = it.ingredient,
+                thumb = it.thumb,
+                author = it.author,
+                step = it.step,
+                title = it.title,
+                difficulty = it.difficulty,
+                desc = it.desc,
+                isFavorite = it.isFavorite
+            )
+        }
 
     fun mapEntitiesArticleToDomain(input: List<ArticleEntity>): List<Article> =
-            input.map {
-                Article(
-                        key = it.key,
-                        title = it.title,
-                        thumb = it.thumb,
-                        tags = it.tags,
-                        isFavorite = it.isFavorite
-                )
-            }
+        input.map {
+            Article(
+                key = it.key,
+                title = it.title,
+                thumb = it.thumb,
+                tags = it.tags,
+                isFavorite = it.isFavorite
+            )
+        }
 
     fun mapEntityArticleDetailToDomain(input: ArticleDetailEntity?): Article =
-            Article(
-                    thumb = input?.thumb,
-                    datePublished = input?.datePublished,
-                    author = input?.author,
-                    description = input?.description,
-                    title = input?.title
-            )
+        Article(
+            thumb = input?.thumb,
+            datePublished = input?.datePublished,
+            author = input?.author,
+            description = input?.description,
+            title = input?.title
+        )
 
     fun mapEntityListCategoryToDomain(input: List<ListCategoryEntity>): List<Category> =
-            input.map {
-                Category(
-                        category = it.category,
-                        key = it.key
-                )
-            }
+        input.map {
+            Category(
+                category = it.category,
+                key = it.key
+            )
+        }
 
     fun mapEntitiesContentCategoryToDomain(input: List<CookingEntity>): List<Cooking> =
-            input.map {
-                Cooking(
-                        cookingID = it.cookingID,
-                        title = it.title,
-                        thumb = it.thumb,
-                        times = it.times,
-                        servings = it.portion,
-                        difficulty = it.difficulty,
-                        tags = it.tags
-                )
-            }
+        input.map {
+            Cooking(
+                cookingID = it.cookingID,
+                title = it.title,
+                thumb = it.thumb,
+                times = it.times,
+                servings = it.portion,
+                difficulty = it.difficulty,
+                tags = it.tags
+            )
+        }
 
     // ==================== Domain To Entity ====================
     fun mapDomainToEntityCooking(input: Cooking) = CookingDetailEntity(
-            servings = input.servings,
-            times = input.times,
-            ingredient = input.ingredient,
-            thumb = input.thumb,
-            author = input.author,
-            step = input.step,
-            title = input.title!!,
-            difficulty = input.difficulty,
-            desc = input.desc,
-            isFavorite = input.isFavorite!!
+        servings = input.servings,
+        times = input.times,
+        ingredient = input.ingredient,
+        thumb = input.thumb,
+        author = input.author,
+        step = input.step,
+        title = input.title!!,
+        difficulty = input.difficulty,
+        desc = input.desc,
+        isFavorite = input.isFavorite!!
     )
 }

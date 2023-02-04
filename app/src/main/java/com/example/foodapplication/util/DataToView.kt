@@ -94,7 +94,8 @@ class DataToView(
 
     private fun setIngRecyclerView(ingredients: List<String>) {
         with(binding.rvIngredients) {
-            adapterIngredients = IngredientsAdapter(ingredients)
+            adapterIngredients = IngredientsAdapter()
+            adapterIngredients.submitList(ingredients)
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             adapter = adapterIngredients
@@ -103,7 +104,8 @@ class DataToView(
 
     private fun setTLRecyclerView(step: List<String>) {
         with(binding.rvStep) {
-            adaptersTL = TimelineAdapter(step)
+            adaptersTL = TimelineAdapter()
+            adaptersTL.submitList(step)
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             adapter = adaptersTL

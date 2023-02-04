@@ -5,14 +5,14 @@ import androidx.room.RoomDatabase
 import com.example.core.data.source.local.entity.*
 
 @Database(
-        entities = [
-            CookingEntity::class,
-            ArticleEntity::class,
-            CookingDetailEntity::class,
-            ArticleDetailEntity::class,
-            ListCategoryEntity::class
-        ],
-        version = 1, exportSchema = false
+    entities = [
+        CookingEntity::class,
+        ArticleEntity::class,
+        CookingDetailEntity::class,
+        ArticleDetailEntity::class,
+        ListCategoryEntity::class
+    ],
+    version = 1, exportSchema = false
 )
 abstract class CookingDatabase : RoomDatabase() {
 

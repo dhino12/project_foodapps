@@ -50,8 +50,6 @@ class DataToViewRandom(
                 setIngRecyclerView(stringToArrayIngredient)
             }
 
-            Log.e("error DataToView cookDetail", cookingDetailEntity.title.toString())
-
             var stateFavorite = cookingDetailEntity.isFavorite
             if (stateFavorite != null) {
                 setStatusFavorite(stateFavorite)
@@ -66,7 +64,8 @@ class DataToViewRandom(
 
     private fun setIngRecyclerView(ingredients: List<String>) {
         with(binding.rvIngredients) {
-            adapterIngredients = IngredientsAdapter(ingredients)
+            adapterIngredients = IngredientsAdapter()
+            adapterIngredients.submitList(ingredients)
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             adapter = adapterIngredients
@@ -75,7 +74,8 @@ class DataToViewRandom(
 
     private fun setTLRecyclerView(step: List<String>) {
         with(binding.rvStep) {
-            adaptersTL = TimelineAdapter(step)
+            adaptersTL = TimelineAdapter()
+            adaptersTL.submitList(step)
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             adapter = adaptersTL

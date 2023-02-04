@@ -10,46 +10,47 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.R
 import com.example.core.databinding.ItemListBinding
-import com.example.core.domain.model.Search
+import com.example.core.domain.model.Article
 
-class SearchAdapter (private val onItemClick: (Search) -> Unit)
-    : ListAdapter<Search, SearchAdapter.ViewHolder>(DIFF_CALLBACK) {
+class ListArticleAdapter (private val onItemClick: (Article) -> Unit)
+    : ListAdapter<Article, ListArticleAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
-        val DIFF_CALLBACK: DiffUtil.ItemCallback<Search> =
-            object : DiffUtil.ItemCallback<Search>() {
-                override fun areItemsTheSame(oldUser: Search, newUser: Search): Boolean {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<Article> =
+            object : DiffUtil.ItemCallback<Article>() {
+                override fun areItemsTheSame(oldUser: Article, newUser: Article): Boolean {
                     return oldUser.title == newUser.title
                 }
 
                 @SuppressLint("DiffUtilEquals")
-                override fun areContentsTheSame(oldUser: Search, newUser: Search): Boolean {
+                override fun areContentsTheSame(oldUser: Article, newUser: Article): Boolean {
                     return oldUser == newUser
                 }
             }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListArticleAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(dataSearch = getItem(position))
+        holder.bind(dataArticle = getItem(position))
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemListBinding.bind(itemView)
-        fun bind(dataSearch: Search) {
-            if (dataSearch != null){
+        fun bind(dataArticle: Article) {
+            if (dataArticle != null){
                 binding.composeView.setContent {
                     MaterialTheme {
                         ListItemFood(
-                            urlToImage = dataSearch.thumb,
-                            title = dataSearch.title,
-                            difficulty = dataSearch.difficulty,
-                            publishedAt = dataSearch.times,
-                            onItemClick = { onItemClick(dataSearch) }
+                            urlToImage = dataArticle.thumb,
+                            title = dataArticle.title,
+                            publishedAt = dataArticle.datePublished,
+                            tags = dataArticle.tags,
+                            difficulty = null,
+                            onItemClick = { onItemClick(dataArticle) }
                         )
                     }
                 }

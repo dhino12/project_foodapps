@@ -35,12 +35,15 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.2.0'
+        kotlinCompilerVersion '1.7.0'
     }
 }
 
 dependencies {
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     // Room
     implementation "androidx.room:room-runtime:$room_version"
