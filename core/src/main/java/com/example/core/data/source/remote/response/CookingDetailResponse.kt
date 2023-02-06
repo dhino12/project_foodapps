@@ -31,7 +31,7 @@ data class ResultsDetailCooking(
         @field:SerializedName("title")
         val title: String,
 
-        @field:SerializedName("dificulty")
+        @field:SerializedName("difficulty")
         val difficulty: String? = null,
 
         @field:SerializedName("desc")

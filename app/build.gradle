@@ -39,9 +39,9 @@ android {
         viewBinding true
         compose true
     }
-
     composeOptions {
         kotlinCompilerExtensionVersion '1.2.0'
+        kotlinCompilerVersion '1.7.0'
     }
 
     dynamicFeatures = [':favorite', ':random']

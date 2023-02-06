@@ -1,5 +1,6 @@
 package com.example.foodapplication.ui.detail.food
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.core.data.Resource
 import com.example.foodapplication.databinding.ActivityDetailFoodBinding
+import com.example.foodapplication.ui.MainActivity
 import com.example.foodapplication.util.DataToView
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks
 import com.github.ksoichiro.android.observablescrollview.ScrollState
@@ -70,6 +72,7 @@ class DetailFoodActivity : AppCompatActivity(), ObservableScrollViewCallbacks {
 
             viewModel.setSelectedCook(titleCookingDb = keyCollection)
             viewModel.cookingDetail.observe(this) { titleKey ->
+                Log.e("detail", titleKey.data.toString())
                 if (titleKey != null) {
                     when (titleKey) {
                         is Resource.Loading -> {
@@ -136,5 +139,14 @@ class DetailFoodActivity : AppCompatActivity(), ObservableScrollViewCallbacks {
     override fun onDestroy() {
         super.onDestroy()
         Glide.get(this).clearMemory()
+
+        finish()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+
+        finish()
+        return super.onSupportNavigateUp()
     }
 }

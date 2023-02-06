@@ -25,6 +25,6 @@ data class ResultsItemCooking(
 		@field:SerializedName("key")
 		val key: String? = null,
 
-		@field:SerializedName("dificulty")
+		@field:SerializedName("difficulty")
 		val difficulty: String? = null
 )

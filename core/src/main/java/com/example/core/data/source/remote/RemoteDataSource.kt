@@ -14,7 +14,7 @@ class RemoteDataSource constructor(private val apiService: ApiService) {
     suspend fun getAllCooking(): Flow<ApiResponse<List<ResultsItemCooking>>> {
         return flow {
             try {
-                val client = apiService.getCooking(1)
+                val client = apiService.getCooking()
                 val dataArray = client.results
                 if (dataArray.isNullOrEmpty()) {
                     emit(ApiResponse.Empty)
@@ -48,11 +48,10 @@ class RemoteDataSource constructor(private val apiService: ApiService) {
     }
 
     suspend fun getAllArticle(): Flow<ApiResponse<List<ResultItemArticle>>> {
-        val listCategory = arrayListOf("inspirasi-dapur", "makanan-gaya-hidup", "tips-masak")
 
         return flow {
             try {
-                val client = apiService.getArticle(listCategory.random())
+                val client = apiService.getArticle()
                 val dataArray = client.results
                 if (dataArray.isNullOrEmpty()) {
                     emit(ApiResponse.Empty)

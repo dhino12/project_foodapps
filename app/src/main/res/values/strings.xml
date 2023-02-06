@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Food Application</string>
+    <string name="app_name">Recipe Apps</string>
     <string name="title_home">Home</string>
     <string name="title_category">Category</string>
     <string name="title_favorite">Favorite</string>
@@ -23,6 +23,7 @@
     <string name="welcome2">Hey, Selamat Datang</string>
     <string name="back_to_menu">Kembali ke Main menu</string>
     <string name="search_Result">Hasil Pencarian</string>
+    <string name="search">Search</string>
     <string name="message_not_favorite_found">Resep Favorite tidak ditemukan\n mungkin anda belum menambahkannya</string>
     <string name="search_food_word">Cari Resep untuk menu makan kamu hari ini</string>
     <string name="category_list">Daftar Category</string>

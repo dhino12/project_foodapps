@@ -14,4 +14,4 @@ data class ResultsItemCategory(
         @field:SerializedName("key")
         val key: String? = null,
 
-        )
+)

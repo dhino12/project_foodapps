@@ -26,7 +26,7 @@ buildscript {
         lifecycle_version = '2.5.1'
 
         // Koin
-        koin_version = "3.3.2"
+        koin_version = "3.4.1"
 
         // Lottie
         lottie_version = '5.2.0'
@@ -35,6 +35,7 @@ buildscript {
         sql_lite_chiper_version = '2.3.0'
         sql_chiper_version = '4.5.3'
     }
+
     dependencies {
         def nav_version = "2.4.2"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"

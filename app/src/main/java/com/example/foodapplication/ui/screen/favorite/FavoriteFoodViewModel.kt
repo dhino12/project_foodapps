@@ -1,4 +1,4 @@
-package com.example.foodapplication.favorite.ui
+package com.example.foodapplication.ui.screen.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

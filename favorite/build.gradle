@@ -24,10 +24,19 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.2.0'
+        kotlinCompilerVersion '1.7.0'
     }
 }
 
 dependencies {
     implementation project(":app")
     implementation project(":core")
+    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }

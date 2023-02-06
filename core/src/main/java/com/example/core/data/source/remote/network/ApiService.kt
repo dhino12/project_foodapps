@@ -6,11 +6,11 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("/api/recipes/{page}")
-    suspend fun getCooking(@Path("page") page: Int): CookingResponse
+    @GET("/api/recipes")
+    suspend fun getCooking(): CookingResponse
 
-    @GET("/api/categorys/article/{tags}")
-    suspend fun getArticle(@Path("tags") tags: String): ArticleResponse
+    @GET("/api/articles/new")
+    suspend fun getArticle(): ArticleResponse
 
     @GET("/api/recipe/{key}")
     suspend fun getDetailCooking(@Path("key") key: String): CookingDetailResponse
@@ -18,10 +18,10 @@ interface ApiService {
     @GET("/api/article/{tags}/{key}")
     suspend fun getDetailArticle(@Path("tags") tags: String, @Path("key") key: String): ArticleDetailResponse
 
-    @GET("/api/categorys/recipes")
+    @GET("/api/category/recipes")
     suspend fun getListCategory(): ListCategoryResponse
 
-    @GET("/api/categorys/recipes/{tag}")
+    @GET("/api/category/recipes/{tag}")
     suspend fun getCategoryContent(@Path("tag") key: String): CookingResponse
 
     @GET("/api/search/")

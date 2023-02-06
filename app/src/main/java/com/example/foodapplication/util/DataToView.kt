@@ -44,7 +44,6 @@ class DataToView(
             binding.timesContentDetail.text = cookingDetailEntity.times
             binding.difficultyContentDetail.text = cookingDetailEntity.difficulty
 
-            Log.e("step", cookingDetailEntity.step.toString())
             val stringToArrayStep = cookingDetailEntity.step?.removeSurrounding("[", "]")?.split(",,")
             val stringToArrayIngredient = cookingDetailEntity.ingredient?.removeSurrounding("[", "]")?.split(",,")
 
@@ -54,9 +53,6 @@ class DataToView(
             if (stringToArrayIngredient != null) {
                 setIngRecyclerView(stringToArrayIngredient)
             }
-
-            Log.e("error DataToView cookDetail", cookingDetailEntity.title.toString())
-            Log.e("error DataToView cookDetail", cookingDetailEntity.difficulty.toString())
 
             var stateFavorite = cookingDetailEntity.isFavorite
             if (stateFavorite != null) {
