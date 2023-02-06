@@ -1,7 +1,6 @@
 package com.example.foodapplication.util
 
 import android.content.Context
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat

@@ -1,9 +1,7 @@
 package com.example.foodapplication.ui
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
@@ -12,7 +10,6 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -28,17 +25,14 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.foodapplication.R
 import com.example.foodapplication.ui.detail.food.DetailFoodActivity
-import com.example.foodapplication.ui.navigation.NavigationItem
-import com.example.foodapplication.ui.navigation.Screen
+import com.example.foodapplication.ui.navigateion.NavigationItem
+import com.example.foodapplication.ui.navigateion.Screen
 import com.example.foodapplication.ui.screen.category.CategoryScreen
 import com.example.foodapplication.ui.screen.category.ListRecipeByCategory
 import com.example.foodapplication.ui.screen.favorite.FavoriteScreen
 import com.example.foodapplication.ui.screen.home.HomeScreen
 import com.example.foodapplication.ui.screen.home.HomeScreenListView
 import com.example.foodapplication.ui.screen.search.SearchScreen
-import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
-import com.google.android.play.core.splitinstall.SplitInstallRequest
-import kotlin.math.log
 
 @Composable
 fun RecipeApp (

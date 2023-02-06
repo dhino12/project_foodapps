@@ -1,6 +1,7 @@
-package com.example.foodapplication.ui.navigation
+package com.example.foodapplication.ui.navigateion
 
 import androidx.compose.ui.graphics.vector.ImageVector
+
 
 data class NavigationItem (
     val title: String,

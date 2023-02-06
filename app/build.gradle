@@ -44,7 +44,7 @@ android {
         kotlinCompilerVersion '1.7.0'
     }
 
-    dynamicFeatures = [':favorite', ':random']
+//    dynamicFeatures = [':favorite', ':random']
 }
 
 dependencies {
