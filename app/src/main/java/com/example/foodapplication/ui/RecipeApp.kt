@@ -13,8 +13,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -184,8 +186,6 @@ private fun BottomBar(
     modifier: Modifier = Modifier
 ) {
     BottomNavigation (
-        backgroundColor = Color(R.color.white),
-        contentColor = Color(R.color.orange),
         modifier = modifier
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -208,14 +208,21 @@ private fun BottomBar(
             )
         )
 
-        BottomNavigation {
+        BottomNavigation (
+            backgroundColor = colorResource(R.color.white),
+        ) {
             navigationItems.map { item ->
                 BottomNavigationItem(
                     icon = { Icon(
                             imageVector = item.icon,
                             contentDescription = item.title,
+                            tint =
+                                if (currentRoute == item.screen.route)
+                                    Color(ContextCompat.getColor(
+                                        LocalContext.current, R.color.orange ))
+                                else Color.Gray
                         )},
-                    label = { Text(text = item.title) },
+                    label = { Text(text = item.title, color = Color.Black) },
                     selected = currentRoute == item.screen.route,
                     onClick = {
                         navController.navigate(item.screen.route) {

@@ -63,6 +63,7 @@ fun FavoriteContent(
                 text = stringResource(id = R.string.title_favorite),
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp,
+                color = Color.White,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 12.dp),

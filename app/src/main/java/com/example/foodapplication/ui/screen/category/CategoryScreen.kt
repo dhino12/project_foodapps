@@ -1,5 +1,6 @@
 package com.example.foodapplication.ui.screen.category
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -28,7 +29,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.example.core.data.Resource
 import com.example.core.domain.model.Category
-import com.example.core.ui.theme.Shapes
+import com.example.foodapplication.ui.theme.Shapes
 import com.example.foodapplication.R
 import com.example.foodapplication.ui.common.UiState
 import com.example.foodapplication.ui.components.ItemCardTitLe
