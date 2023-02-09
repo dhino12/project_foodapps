@@ -182,8 +182,8 @@ fun RecipeApp (
                     navArgument("title") { type = NavType.StringType }
                 ),
             ) {
-                val idCooking = it.arguments?.getString("foodId") ?: null
-                val titleCooking = it.arguments?.getString("title") ?: null
+                val idCooking = it.arguments?.getString("foodId")
+                val titleCooking = it.arguments?.getString("title")
 
                 LaunchedEffect(key1 = true ) {
                     val intent = Intent(context, DetailFoodActivity::class.java)
@@ -201,17 +201,17 @@ fun RecipeApp (
                     navArgument("title") { type = NavType.StringType },
                 )
             ) {
-                val idArticle = it.arguments?.getString("articleId") ?: null
-                val tagArticle = it.arguments?.getString("tag") ?: null
-                val titleArticle = it.arguments?.getString("title") ?: null
-                val context = LocalContext.current as Activity
+                val idArticle = it.arguments?.getString("articleId")
+                val tagArticle = it.arguments?.getString("tag")
+                val titleArticle = it.arguments?.getString("title")
+                val ctx = LocalContext.current as Activity
                 if (idArticle != null) {
                     LaunchedEffect(key1 = true) {
-                        val intent = Intent(context, DetailFoodActivity::class.java)
+                        val intent = Intent(ctx, DetailFoodActivity::class.java)
                         intent.putExtra(DetailFoodActivity.EXTRA_ARTICLE_ID, idArticle)
                         intent.putExtra(DetailFoodActivity.EXTRA_ARTICLE_TAG, tagArticle)
                         intent.putExtra(DetailFoodActivity.EXTRA_ARTICLE_TITLE, titleArticle)
-                        context.startActivity(intent)
+                        ctx.startActivity(intent)
                     }
                 }
             }

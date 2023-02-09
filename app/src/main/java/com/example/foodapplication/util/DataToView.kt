@@ -146,7 +146,7 @@ class DataToView(
 
     private fun getActionBarSize(): Int {
         val typedValue = TypedValue()
-        val textSizeAttr = intArrayOf(com.google.android.material.R.attr.actionBarSize)
+        val textSizeAttr = intArrayOf(androidx.constraintlayout.widget.R.attr.actionBarSize)
         val indexOfAttrTextSize = 0
         val a = context.obtainStyledAttributes(typedValue.data, textSizeAttr)
         val actionBarSize = a.getDimensionPixelSize(indexOfAttrTextSize, -1)

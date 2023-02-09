@@ -23,7 +23,7 @@ class DetailViewModel(private val foodUseCase: FoodUseCase) : ViewModel() {
         foodUseCase.getDetailCooking(title).asLiveData()
     }
 
-    var articleDetail: LiveData<Resource<Article>> = Transformations.switchMap(titleArticle) { title ->
+    var articleDetail: LiveData<Resource<Article>> = Transformations.switchMap(titleArticle) {
         foodUseCase.getArticleDetail(titleArticle.value!!).asLiveData()
     }
 
