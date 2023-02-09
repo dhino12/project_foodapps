@@ -1,4 +1,4 @@
-package com.example.foodapplication.ui.navigateion
+package com.example.foodapplication.ui.navigation
 
 sealed class Screen (val route: String) {
     object Home:Screen("home")

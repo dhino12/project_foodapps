@@ -46,7 +46,7 @@ dependencies{
     implementation 'io.insert-koin:koin-androidx-compose:3.4.1'
 
     // Koin Test
-    testImplementation "io.insert-koin:koin-test:$koin_version"
+    testImplementation "io.insert-koin:koin-test:3.3.2"
     androidTestImplementation "io.insert-koin:koin-test:3.3.2"
 
     // Mockito

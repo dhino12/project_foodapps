@@ -1,4 +1,4 @@
-package com.example.foodapplication.ui.navigateion
+package com.example.foodapplication.ui.navigation
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

@@ -29,8 +29,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.foodapplication.R
 import com.example.foodapplication.ui.detail.food.DetailFoodActivity
-import com.example.foodapplication.ui.navigateion.NavigationItem
-import com.example.foodapplication.ui.navigateion.Screen
+import com.example.foodapplication.ui.navigation.NavigationItem
+import com.example.foodapplication.ui.navigation.Screen
 import com.example.foodapplication.ui.screen.category.CategoryScreen
 import com.example.foodapplication.ui.screen.category.ListRecipeByCategory
 import com.example.foodapplication.ui.screen.favorite.FavoriteScreen
