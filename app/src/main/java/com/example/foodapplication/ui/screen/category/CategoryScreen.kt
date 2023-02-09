@@ -1,9 +1,7 @@
 package com.example.foodapplication.ui.screen.category
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -30,14 +28,11 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.example.core.data.Resource
 import com.example.core.domain.model.Category
-import com.example.foodapplication.ui.theme.Shapes
 import com.example.foodapplication.R
 import com.example.foodapplication.ui.common.UiState
 import com.example.foodapplication.ui.components.ItemCardTitLe
 import com.example.foodapplication.ui.components.loading.SkeletonCardTitle
-import com.example.foodapplication.ui.theme.Orange200
-import com.example.foodapplication.ui.theme.Red200
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.example.foodapplication.ui.theme.Shapes
 import org.koin.androidx.compose.getViewModel
 
 @Composable

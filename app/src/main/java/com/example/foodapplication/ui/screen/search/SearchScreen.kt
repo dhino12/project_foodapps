@@ -41,7 +41,7 @@ fun SearchScreen(
     viewModel.uiStateSearch.collectAsState(initial = UiState.Loading).value.let {
         searchItem -> when (searchItem) {
             is UiState.Loading -> {
-                viewModel.getSearch(query)
+                viewModel.getSearch(query = query)
             }
             is UiState.Success -> {
                 when (searchItem.data) {

@@ -93,16 +93,14 @@ fun ItemFoodsVertical(
 
                 Spacer(modifier = modifier.width(10.dp))
 
-                if (!difficulty.isNullOrEmpty()) {
-                    Text(
-                        text = difficulty ?: "",
-                        overflow = TextOverflow.Ellipsis,
-                        textAlign = TextAlign.Start,
-                        maxLines = 3,
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
+                Text(
+                    text = difficulty ?: "",
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Start,
+                    maxLines = 3,
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold
+                )
             }
         }
     }

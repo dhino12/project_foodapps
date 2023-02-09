@@ -16,5 +16,3 @@ dependencyResolutionManagement {
 rootProject.name = "Food Application"
 include ':app'
 include ':core'
-include ':favorite'
-include ':random'

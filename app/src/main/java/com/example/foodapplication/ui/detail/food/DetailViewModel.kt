@@ -1,6 +1,5 @@
 package com.example.foodapplication.ui.detail.food
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.core.data.Resource
 import com.example.core.domain.model.Article
@@ -12,9 +11,6 @@ class DetailViewModel(private val foodUseCase: FoodUseCase) : ViewModel() {
     private var titleArticle = MutableLiveData<List<String>>()
 
     fun setSelectedCook(titleCookingDb: List<String>? = null, titleArticleDb: List<String>? = null) {
-
-        Log.e("error contentTitleDb", titleCookingDb?.toList().toString())
-        Log.e("error TitleContent", titleCookingDb?.size.toString())
 
         if (titleCookingDb.isNullOrEmpty()) {
             this.titleArticle.value = titleArticleDb

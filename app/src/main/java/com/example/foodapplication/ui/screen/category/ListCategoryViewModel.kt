@@ -1,11 +1,9 @@
 package com.example.foodapplication.ui.screen.category
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.core.data.Resource
 import com.example.core.domain.model.Category
-import com.example.core.domain.model.Cooking
 import com.example.core.domain.usecase.FoodUseCase
 import com.example.foodapplication.ui.common.UiState
 import kotlinx.coroutines.flow.MutableStateFlow

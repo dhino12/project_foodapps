@@ -1,6 +1,5 @@
 package com.example.foodapplication.ui.screen.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.data.Resource
