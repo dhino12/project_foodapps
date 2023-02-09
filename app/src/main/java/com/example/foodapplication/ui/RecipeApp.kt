@@ -3,6 +3,7 @@ package com.example.foodapplication.ui
 import android.app.Activity
 import android.content.Intent
 import android.util.Log
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -35,6 +36,9 @@ import com.example.foodapplication.ui.screen.favorite.FavoriteScreen
 import com.example.foodapplication.ui.screen.home.HomeScreen
 import com.example.foodapplication.ui.screen.home.HomeScreenListView
 import com.example.foodapplication.ui.screen.search.SearchScreen
+import com.example.foodapplication.ui.theme.Orange200
+import com.example.foodapplication.ui.theme.Red200
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun RecipeApp (
@@ -44,6 +48,8 @@ fun RecipeApp (
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     val context = LocalContext.current
+
+    val systemUiController = rememberSystemUiController()
     
     Scaffold(
         bottomBar = {
@@ -58,6 +64,11 @@ fun RecipeApp (
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) {
+                if (!isSystemInDarkTheme()) {
+                    systemUiController.setStatusBarColor(
+                        color = Orange200
+                    )
+                }
                 HomeScreen(
                     navigateToDetailCooking = { keyUrl ->
                         val keyDataCooking = keyUrl.split("&")
@@ -74,6 +85,11 @@ fun RecipeApp (
             }
 
             composable(Screen.Recipes.route) {
+                if (!isSystemInDarkTheme()) {
+                    systemUiController.setStatusBarColor(
+                        color = Orange200
+                    )
+                }
                 HomeScreenListView(
                     indicator = "cooking",
                     navigateToDetail = { keyUrl ->
@@ -84,6 +100,11 @@ fun RecipeApp (
             }
 
             composable(Screen.Category.route) {
+                if (!isSystemInDarkTheme()) {
+                    systemUiController.setStatusBarColor(
+                        color = Red200
+                    )
+                }
                 CategoryScreen(
                     navigateToListRecipeByCategory = { key ->
                         navController.navigate(Screen.RecipesByCategory.createRoute(key))
@@ -92,6 +113,11 @@ fun RecipeApp (
             }
 
             composable(Screen.Favorite.route) {
+                if (!isSystemInDarkTheme()) {
+                    systemUiController.setStatusBarColor(
+                        color = Orange200
+                    )
+                }
                 FavoriteScreen(
                     toDetail = { keyUrl ->
                         val keyDataCooking = keyUrl.split("&")
@@ -104,11 +130,15 @@ fun RecipeApp (
                 route = Screen.RecipesByCategory.route,
                 arguments = listOf(navArgument("category") { type = NavType.StringType })
             ) {
+                if (!isSystemInDarkTheme()) {
+                    systemUiController.setStatusBarColor(
+                        color = Red200
+                    )
+                }
                 val category = it.arguments?.getString("category")
                 ListRecipeByCategory(
                     category = category.toString(),
                     onItemToDetail = { keyUrl ->
-                        Log.e("keyUrl", keyUrl)
                         val keyDataCooking = keyUrl.split("&")
                         navController.navigate(Screen.DetailFood.createRoute(keyDataCooking[0], keyDataCooking[1]))
                     }
@@ -116,6 +146,11 @@ fun RecipeApp (
             }
 
             composable(Screen.Articles.route) {
+                if (!isSystemInDarkTheme()) {
+                    systemUiController.setStatusBarColor(
+                        color = Orange200
+                    )
+                }
                 HomeScreenListView(
                     indicator = "article",
                     navigateToDetail = { key ->
@@ -126,9 +161,13 @@ fun RecipeApp (
             }
 
             composable(Screen.Search.route) {
+                if (!isSystemInDarkTheme()) {
+                    systemUiController.setStatusBarColor(
+                        color = Red200
+                    )
+                }
                 SearchScreen(
                     toDetail = { keyUrl ->
-                        Log.e("keyUrl", keyUrl)
                         val keyDataCooking = keyUrl.split("&")
                         navController.navigate(Screen.DetailFood.createRoute(keyDataCooking[0], keyDataCooking[1]))
                     }
@@ -144,7 +183,6 @@ fun RecipeApp (
             ) {
                 val idCooking = it.arguments?.getString("foodId") ?: null
                 val titleCooking = it.arguments?.getString("title") ?: null
-                Log.e("dataCooking", "$idCooking ||| $titleCooking")
 
                 LaunchedEffect(key1 = true ) {
                     val intent = Intent(context, DetailFoodActivity::class.java)

@@ -15,8 +15,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.example.core.data.Resource
 import com.example.core.domain.model.Cooking
@@ -53,7 +55,7 @@ fun FavoriteContent(
     favorites: List<Cooking>,
     toDetail: (String) -> Unit
 ) {
-    Column {
+    Column (verticalArrangement = Arrangement.Center) {
         TopAppBar(
             backgroundColor = Color(ContextCompat.getColor(LocalContext.current, R.color.orange)),
             contentPadding = PaddingValues(12.dp),
@@ -69,6 +71,25 @@ fun FavoriteContent(
                     .padding(horizontal = 12.dp),
             )
         }
+
+        if (favorites.isEmpty()) {
+            ConstraintLayout (modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
+                val (textInfo) = createRefs()
+                Text(
+                    text = stringResource(R.string.message_not_favorite_found),
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.constrainAs(textInfo) {
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    }
+                )
+            }
+            return@Column
+        }
+
         LazyVerticalGrid(
             columns = GridCells.Adaptive(160.dp),
             contentPadding = PaddingValues(25.dp),

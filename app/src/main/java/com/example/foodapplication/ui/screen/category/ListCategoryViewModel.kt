@@ -14,8 +14,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class ListCategoryViewModel(private val foodUseCase: FoodUseCase) : ViewModel() {
-    val listCategory = foodUseCase.getListCategory().asLiveData()
-
     private val _uiStateCategory: MutableStateFlow<UiState<Resource<List<Category>>>> =
         MutableStateFlow(UiState.Loading)
     val uiStateCategory: StateFlow<UiState<Resource<List<Category>>>> get() = _uiStateCategory

@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -29,9 +30,10 @@ fun ItemFoodsVertical(
     modifier: Modifier = Modifier,
     thumb: String? = "",
     title: String? = "untitled",
-    time: String? = "00:00",
-    difficulty: String? = "none",
-    tags: String? = "none",
+    time: String? = null,
+    difficulty: String? = null,
+    tags: String? = null,
+    brush: Brush? = null,
     OnItemClick: () -> Unit,
 ) {
     Card(
@@ -81,7 +83,7 @@ fun ItemFoodsVertical(
                 verticalAlignment = Alignment.CenterVertically
             ){
                 Text(
-                    text = time.toString(),
+                    text = time ?: "",
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Start,
                     maxLines = 3,
@@ -93,7 +95,7 @@ fun ItemFoodsVertical(
 
                 if (!difficulty.isNullOrEmpty()) {
                     Text(
-                        text = difficulty.toString(),
+                        text = difficulty ?: "",
                         overflow = TextOverflow.Ellipsis,
                         textAlign = TextAlign.Start,
                         maxLines = 3,

@@ -2,7 +2,8 @@ package com.example.foodapplication.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Orange200 = Color(0xFFFF4F00)
+val Orange200 = Color(0xFFFF7700)
+val Red200 = Color(0xFFF53783)
 val Navy200 = Color(0xFFC3DFED)
 val Navy500 = Color(0xFF2D3E50)
 val White100 = Color(0xFFFFFFFF)

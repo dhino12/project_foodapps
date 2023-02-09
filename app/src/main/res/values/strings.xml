@@ -10,6 +10,7 @@
     <string name="food_name">Nama Makanan</string>
     <string name="Search_list">Search List</string>
     <string name="cooking_list">Cooking List</string>
+    <string name="article_list">Article List</string>
     <string name="difficulty">Kesulitan</string>
     <string name="ingredients">Bahan</string>
     <string name="step">Langkah</string>

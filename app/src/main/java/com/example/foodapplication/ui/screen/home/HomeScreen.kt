@@ -34,6 +34,7 @@ import com.example.core.domain.model.Cooking
 import com.example.foodapplication.R
 import com.example.foodapplication.ui.common.UiState
 import com.example.foodapplication.ui.components.ItemFoodsVertical
+import com.example.foodapplication.ui.components.loading.SkeletonItemVertical
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -93,6 +94,7 @@ fun HomeScreen(
 
 @Composable
 fun HomeContent(
+    modifier: Modifier = Modifier,
     cooking: Resource<List<Cooking>>? = null,
     articles: Resource<List<Article>>? = null,
     navigateToDetailCooking: (String) -> Unit,
@@ -100,7 +102,6 @@ fun HomeContent(
     navigateToCookingList: () -> Unit,
     navigateToArticleList: () -> Unit,
     navigateToSearch: () -> Unit,
-    modifier: Modifier = Modifier
 ) {
     Image(
         painter = painterResource(R.drawable.background_home),
@@ -205,20 +206,21 @@ fun HomeContent(
 
         ArticleComposable(
             articles = articles,
-            articleComposable = {
+            modifier = modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.3f)
+                .constrainAs(listArticle) {
+                    top.linkTo(listArticleButton.bottom)
+                    start.linkTo(listArticleButton.start)
+                    end.linkTo(parent.end)
+                }
+                .testTag("Articles"),
+            articleComposable = { lazyModifier ->
                 LazyHorizontalGrid(
                     rows = GridCells.Adaptive(160.dp),
                     contentPadding = PaddingValues(16.dp),
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    modifier = modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.3f)
-                        .constrainAs(listArticle) {
-                            top.linkTo(listArticleButton.bottom)
-                            start.linkTo(listArticleButton.start)
-                            end.linkTo(parent.end)
-                        }
-                        .testTag("Articles")
+                    modifier = lazyModifier
                 ) {
                     if (articles?.data != null) {
                         items(articles.data!!) { article ->
@@ -273,21 +275,22 @@ fun HomeContent(
 
         CookingComposable(
             cooking = cooking,
-            cookingComposable = {
+            modifier = modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.38f)
+                .constrainAs(listCooking) {
+                    top.linkTo(listCookingButton.bottom)
+                    start.linkTo(listCookingButton.start)
+                    end.linkTo(parent.end)
+                }
+                .testTag("cooking"),
+            cookingComposable = { modifierLazy ->
                 LazyHorizontalGrid(
                     rows = GridCells.Adaptive(160.dp),
                     contentPadding = PaddingValues(16.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    modifier = modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.38f)
-                        .constrainAs(listCooking) {
-                            top.linkTo(listCookingButton.bottom)
-                            start.linkTo(listCookingButton.start)
-                            end.linkTo(parent.end)
-                        }
-                        .testTag("Articles")
+                    modifier = modifierLazy
                 ) {
                     if (cooking?.data != null) {
                         items(cooking.data!!) { cookingData ->
@@ -309,15 +312,19 @@ fun HomeContent(
 
 @Composable
 fun ArticleComposable(
+    modifier: Modifier = Modifier,
     articles: Resource<List<Article>>? = null,
-    articleComposable: @Composable () -> Unit,
+    articleComposable: @Composable (modifier: Modifier) -> Unit,
 ) {
+    /** TODO create a modifier so that it can be used on components when loading,
+     * as well as full data so it's not complicated
+     */
     when(articles) {
         is Resource.Loading -> {
-//            Toast.makeText(LocalContext.current, "Loading ...", Toast.LENGTH_SHORT).show()
+            SkeletonItemVertical(isLoading = true, modifier = modifier)
         }
         is Resource.Success -> {
-            articleComposable()
+            articleComposable(modifier = modifier)
             Log.d("dataArticle", articles.data.toString())
         }
         is Resource.Error -> {}
@@ -327,15 +334,19 @@ fun ArticleComposable(
 
 @Composable
 fun CookingComposable(
+    modifier: Modifier = Modifier,
     cooking: Resource<List<Cooking>>? = null,
-    cookingComposable: @Composable () -> Unit
+    cookingComposable: @Composable (modifier: Modifier) -> Unit
 ) {
+    /** TODO create a modifier so that it can be used on components when loading,
+     * as well as full data so it's not complicated
+     */
     when(cooking) {
         is Resource.Loading -> {
-//            Toast.makeText(LocalContext.current, "Sedang Loading", Toast.LENGTH_SHORT).show()
+            SkeletonItemVertical(isLoading = true, modifier = modifier)
         }
         is Resource.Success -> {
-            cookingComposable()
+            cookingComposable(modifier = modifier)
         }
         is Resource.Error -> {}
         else -> {}

@@ -17,6 +17,7 @@ import com.example.core.data.Resource
 import com.example.core.domain.model.Cooking
 import com.example.foodapplication.ui.common.UiState
 import com.example.foodapplication.ui.components.ItemFoodsHorizontal
+import com.example.foodapplication.ui.components.loading.SkeletonItemHorizontal
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -32,7 +33,17 @@ fun ListRecipeByCategory(
             }
             is UiState.Success -> {
                 when (cooking.data) {
-                    is Resource.Loading -> {}
+                    is Resource.Loading -> {
+                        LazyVerticalGrid(
+                            columns = GridCells.Adaptive(260.dp),
+                            horizontalArrangement = Arrangement.spacedBy(10.dp),
+                            verticalArrangement = Arrangement.spacedBy(10.dp),
+                        ) {
+                            items(5) {
+                                SkeletonItemHorizontal(isLoading = true)
+                            }
+                        }
+                    }
                     is Resource.Success -> {
                         ContentRecipeByCategory(
                             cooking = cooking.data.data!!,

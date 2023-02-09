@@ -3,6 +3,7 @@ package com.example.foodapplication.ui.screen.category
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -33,6 +34,10 @@ import com.example.foodapplication.ui.theme.Shapes
 import com.example.foodapplication.R
 import com.example.foodapplication.ui.common.UiState
 import com.example.foodapplication.ui.components.ItemCardTitLe
+import com.example.foodapplication.ui.components.loading.SkeletonCardTitle
+import com.example.foodapplication.ui.theme.Orange200
+import com.example.foodapplication.ui.theme.Red200
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -40,6 +45,7 @@ fun CategoryScreen (
     viewModel: ListCategoryViewModel = getViewModel(),
     navigateToListRecipeByCategory: (String) -> Unit
 ) {
+
     viewModel.uiStateCategory.collectAsState (initial = UiState.Loading)
         .value.let { categoryItem ->
             when (categoryItem) {
@@ -48,7 +54,9 @@ fun CategoryScreen (
                 }
                 is UiState.Success -> {
                     when (categoryItem.data) {
-                        is Resource.Loading -> {}
+                        is Resource.Loading -> {
+                            SkeletonCardTitle(isLoading = true)
+                        }
                         is Resource.Success -> {
                             CategoryContent(
                                 categories = categoryItem.data.data!!,
