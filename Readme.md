@@ -1,6 +1,9 @@
 # Project Foodapps
 [![Winner](./img/compose_challange.jpg)](https://www.dicoding.com/blog/selamat-kepada-pemenang-compose-migration-champion-challenge-2023/)
 > Sangat bersyukur project ini dapat memenangkan sebuah challenge yang diadakan dicoding, thanks you dicoding 🙌 🤞
+
+<br><br>
+
 ![](./img/Recipes%20App.png) <br><br>
 Final Submission MADE Dicoding with Kotlin Coroutine and KOIN, aplikasi yang membantu untuk melihat menu resep makanan dan panduan atau langkah-langkah pembuatan lengkap dengan bahan-bahan yang diperlukan.
 
