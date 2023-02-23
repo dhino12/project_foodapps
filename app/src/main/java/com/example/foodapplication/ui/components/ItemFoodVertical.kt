@@ -38,9 +38,8 @@ fun ItemFoodsVertical(
         shape = RoundedCornerShape(12.dp),
         elevation = 3.dp,
         modifier = modifier
+            .widthIn(max = 250.dp)
             .padding(10.dp)
-            .widthIn(max = 350.dp)
-            .heightIn(max= 250.dp)
             .clickable { OnItemClick() }
     ) {
         Box {
@@ -59,7 +58,7 @@ fun ItemFoodsVertical(
             )
         }
 
-        Column(modifier = modifier.fillMaxSize()){
+        Column{
             AsyncImage(
                 model = thumb,
                 contentDescription = "food $title",
@@ -71,14 +70,14 @@ fun ItemFoodsVertical(
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Start,
                 color = Color(ContextCompat.getColor(LocalContext.current, R.color.orange)),
-                maxLines = 3,
+                maxLines = 2,
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = modifier.padding(start = 12.dp, top = 10.dp, bottom = 12.dp, end = 12.dp)
             )
             Row (
-                modifier = modifier.padding(horizontal = 12.dp),
-                verticalAlignment = Alignment.CenterVertically
+                modifier = modifier.padding(12.dp),
+                verticalAlignment = Alignment.CenterVertically,
             ){
                 Text(
                     text = time ?: "",
@@ -110,7 +109,7 @@ fun ItemCardVerticalPreview() {
     MaterialTheme {
         ItemFoodsVertical(
             thumb = "",
-            title = "Ada Ajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            title = "Ada Ajaaaaaaaaaaa",
             time = "121",
             difficulty = "sulit",
             tags = "aja",

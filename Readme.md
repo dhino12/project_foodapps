@@ -1,10 +1,19 @@
-# project_foodapps
-Final Submission MADE Dicoding with Kotlin Coroutine and KOIN
+# Project Foodapps
+[![Winner](./img/winner.jpg)](https://www.dicoding.com/blog/selamat-kepada-pemenang-compose-migration-champion-challenge-2023/)
+![](./img/Recipes%20App.png) <br><br>
+Final Submission MADE Dicoding with Kotlin Coroutine and KOIN, aplikasi yang membantu untuk melihat menu resep makanan dan panduan atau langkah-langkah pembuatan lengkap dengan bahan-bahan yang diperlukan.
 
 [![Dhino12](https://circleci.com/gh/Dhino12/project_foodapps.svg?style=shield)](https://app.circleci.com/pipelines/github/Dhino12/project_foodapps)
 
 ## API Used
 * [Masak apa Hari ini by tomorisakura](https://github.com/Dhino12/unofficial-masakapahariini-api)
+
+## Track Record
+Aplikasi ini telah dimigrasi dari penggunaan ui native menjadi jetpack compose, jika ingin melihat versi sebelum migrasi dapat klik dibawah
+| Title     | Description                                                      | Link    |
+| --------- | ---------------------------------------------------------------- | ------- | 
+| UI Native | Penggunaan masih menggunakan ui native dengan XML dan kotlin     | [link](https://github.com/Dhino12/project_foodapps/tree/4cc59c5ef79c8ccadbb3277f6c08d0c1fa0c7e0e) |
+| Jetpack Compose | Penggunaan sudah dimigrasi kedalam compose dan kotlin      | [link](https://github.com/Dhino12/project_foodapps) |
 
 [//]: # (## Dependencies Used :)
 

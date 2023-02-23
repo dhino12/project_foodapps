@@ -2,10 +2,13 @@ package com.example.foodapplication.ui.screen.home
 
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -34,6 +37,8 @@ import com.example.core.domain.model.Article
 import com.example.core.domain.model.Cooking
 import com.example.foodapplication.R
 import com.example.foodapplication.ui.common.UiState
+import com.example.foodapplication.ui.components.ArticleComposable
+import com.example.foodapplication.ui.components.CookingComposable
 import com.example.foodapplication.ui.components.ItemFoodsVertical
 import com.example.foodapplication.ui.components.loading.SkeletonItemVertical
 import org.koin.androidx.compose.getViewModel
@@ -56,20 +61,15 @@ fun HomeScreen(
         initial = UiState.Loading
     ).value
 
+    var cookings: Resource<List<Cooking>>? = null
+    var articles: Resource<List<Article>>? = null
+
     when(viewModelCooking) {
         is UiState.Loading -> {
             viewModel.getAllItemRecipe()
         }
         is UiState.Success -> {
-            HomeContent(
-                cooking = viewModelCooking.data,
-                modifier = modifier,
-                navigateToDetailCooking = navigateToDetailCooking,
-                navigateToArticleList = navigateToArticleList,
-                navigateToCookingList = navigateToCookingList,
-                navigateToSearch = navigateToSearch,
-                navigateToDetailArticle = {},
-            )
+            cookings = viewModelCooking.data
         }
         is UiState.Error -> {}
     }
@@ -79,18 +79,21 @@ fun HomeScreen(
             viewModel.getAllItemArticle()
         }
         is UiState.Success -> {
-            HomeContent(
-                articles = viewModelArticle.data,
-                modifier = modifier,
-                navigateToDetailArticle = navigateToDetailArticle,
-                navigateToCookingList = navigateToCookingList,
-                navigateToArticleList = navigateToArticleList,
-                navigateToSearch = navigateToSearch,
-                navigateToDetailCooking = {},
-            )
+            articles = viewModelArticle.data
         }
         is UiState.Error -> {}
     }
+
+    HomeContent(
+        cooking = cookings,
+        articles = articles,
+        modifier = modifier,
+        navigateToDetailCooking = navigateToDetailCooking,
+        navigateToArticleList = navigateToArticleList,
+        navigateToCookingList = navigateToCookingList,
+        navigateToSearch = navigateToSearch,
+        navigateToDetailArticle = {},
+    )
 }
 
 @Composable
@@ -104,21 +107,28 @@ fun HomeContent(
     navigateToArticleList: () -> Unit,
     navigateToSearch: () -> Unit,
 ) {
-    Image(
-        painter = painterResource(R.drawable.background_home),
-        contentDescription = "background_wave",
-        contentScale = ContentScale.FillHeight
-    )
     ConstraintLayout(
         modifier = modifier
+            .fillMaxWidth()
             .fillMaxHeight()
-            .padding(12.dp)
+            .verticalScroll(rememberScrollState())
     ) {
         val (
             textWelcome, textDesc,
             randomButton, searchButton,
             listArticleButton, listCookingButton,
-            listArticle, listCooking ) = createRefs()
+            listArticle, listCooking, box1, imgBackground ) = createRefs()
+
+        Image(
+            painter = painterResource(R.drawable.background_home),
+            contentDescription = "background_wave",
+            contentScale = ContentScale.FillHeight,
+            modifier = modifier.constrainAs(imgBackground) {
+                start.linkTo(parent.start)
+                top.linkTo(parent.top)
+                end.linkTo(parent.end)
+            }
+        )
 
         Text(
             text = stringResource(R.string.welcome2),
@@ -126,6 +136,7 @@ fun HomeContent(
             fontWeight = FontWeight.Bold,
             color = Color.White,
             modifier = Modifier
+                .padding(20.dp)
                 .constrainAs(textWelcome){
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
@@ -134,9 +145,10 @@ fun HomeContent(
         Text(
             text = stringResource(R.string.welcome),
             fontSize = 13.sp,
+            fontWeight = FontWeight(400),
             color = Color.DarkGray,
             modifier = Modifier
-                .padding(vertical = 10.dp)
+                .padding(bottom = 10.dp, start = 20.dp)
                 .constrainAs(textDesc) {
                     top.linkTo(textWelcome.bottom)
                     start.linkTo(textWelcome.start)
@@ -209,41 +221,19 @@ fun HomeContent(
             articles = articles,
             modifier = modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.3f)
+                .height(240.dp)
                 .constrainAs(listArticle) {
                     top.linkTo(listArticleButton.bottom)
                     start.linkTo(listArticleButton.start)
                     end.linkTo(parent.end)
                 }
                 .testTag("Articles"),
-            articleComposable = { lazyModifier ->
-                LazyHorizontalGrid(
-                    rows = GridCells.Adaptive(160.dp),
-                    contentPadding = PaddingValues(16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    modifier = lazyModifier
-                ) {
-                    if (articles?.data != null) {
-                        items(articles.data!!) { article ->
-                            Log.e("data", article.title.toString())
-                            ItemFoodsVertical(
-                                thumb = article.thumb,
-                                title = article.title,
-                                time = article.datePublished,
-                                tags = article.tags,
-                                OnItemClick = { navigateToDetailArticle(
-                                    "${article.key!!.replace("/", "&")}&${article.title}"
-                                ) }
-                            )
-                        }
-                    }
-                }
-            }
+            navigateToDetailArticle = navigateToDetailArticle
         )
         IconButton(
             onClick = { navigateToCookingList() },
             modifier = modifier
-                .padding(top = 200.dp, bottom = 5.dp)
+                .padding(top = 220.dp, bottom = 5.dp)
                 .constrainAs(listCookingButton) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -278,79 +268,15 @@ fun HomeContent(
             cooking = cooking,
             modifier = modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.38f)
+                .height(280.dp)
                 .constrainAs(listCooking) {
                     top.linkTo(listCookingButton.bottom)
                     start.linkTo(listCookingButton.start)
                     end.linkTo(parent.end)
                 }
                 .testTag("cooking"),
-            cookingComposable = { modifierLazy ->
-                LazyHorizontalGrid(
-                    rows = GridCells.Adaptive(160.dp),
-                    contentPadding = PaddingValues(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    modifier = modifierLazy
-                ) {
-                    if (cooking?.data != null) {
-                        items(cooking.data!!) { cookingData ->
-                            ItemFoodsVertical(
-                                thumb = cookingData.thumb,
-                                title = cookingData.title,
-                                difficulty = cookingData.difficulty,
-                                time = cookingData.times,
-                                tags = cookingData.tags,
-                                OnItemClick = { navigateToDetailCooking("${cookingData.cookingID!!}&${cookingData.title!!}") },
-                            )
-                        }
-                    }
-                }
-            }
+            navigateToDetailCooking = navigateToDetailCooking
         )
-    }
-}
-
-@Composable
-fun ArticleComposable(
-    modifier: Modifier = Modifier,
-    articles: Resource<List<Article>>? = null,
-    articleComposable: @Composable (modifier: Modifier) -> Unit,
-) {
-    /** TODO create a modifier so that it can be used on components when loading,
-     * as well as full data so it's not complicated
-     */
-    when(articles) {
-        is Resource.Loading -> {
-            SkeletonItemVertical(isLoading = true, modifier = modifier)
-        }
-        is Resource.Success -> {
-            articleComposable(modifier = modifier)
-            Log.d("dataArticle", articles.data.toString())
-        }
-        is Resource.Error -> {}
-        else -> {}
-    }
-}
-
-@Composable
-fun CookingComposable(
-    modifier: Modifier = Modifier,
-    cooking: Resource<List<Cooking>>? = null,
-    cookingComposable: @Composable (modifier: Modifier) -> Unit
-) {
-    /** TODO create a modifier so that it can be used on components when loading,
-     * as well as full data so it's not complicated
-     */
-    when(cooking) {
-        is Resource.Loading -> {
-            SkeletonItemVertical(isLoading = true, modifier = modifier)
-        }
-        is Resource.Success -> {
-            cookingComposable(modifier = modifier)
-        }
-        is Resource.Error -> {}
-        else -> {}
     }
 }
 
@@ -363,7 +289,7 @@ fun HomeContentPreview() {
             navigateToDetailArticle = {},
             navigateToCookingList = {},
             navigateToArticleList = {},
-            navigateToSearch = {}
+            navigateToSearch = {},
         )
     }
 }

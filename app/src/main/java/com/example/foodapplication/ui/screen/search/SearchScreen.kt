@@ -1,12 +1,14 @@
 package com.example.foodapplication.ui.screen.search
 
-import android.util.Log
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -23,7 +25,6 @@ import com.example.foodapplication.R
 import com.example.foodapplication.ui.common.UiState
 import com.example.foodapplication.ui.components.ItemFoodsHorizontal
 import org.koin.androidx.compose.koinViewModel
-
 
 @Composable
 fun SearchScreen(
@@ -98,7 +99,7 @@ fun SearchContent(
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     top.linkTo(parent.top)
-                }
+                },
         )
 
         Text(
